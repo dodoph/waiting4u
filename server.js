@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/login.html'));
+    res.send('<h1>This will be a login page!<h1>')
 });
 
 app.get('/logout', (req, res) => {
