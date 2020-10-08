@@ -2,15 +2,18 @@
   "name": "waiting4u",
   "version": "1.0.0",
   "description": "capstone",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
+    "client": "file:client",
     "express": "^4.17.1",
-    "nodemon": "^2.0.4",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
