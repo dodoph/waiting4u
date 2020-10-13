@@ -8,6 +8,9 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
+        <Link to="#!">Pets</Link>
+      </li>
+      <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">Logout</span>
@@ -19,7 +22,10 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="#!">Availables</Link>
+        <Link to="/aboutus">About us</Link>
+      </li>
+      <li>
+        <Link to="#!">Pets</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>
@@ -37,7 +43,7 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className="fas fa-paw"></i> Waiting4U
         </Link>
       </h1>
-      {!loading && (
+      {(!loading || loading) && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}
     </nav>
@@ -46,11 +52,11 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);
