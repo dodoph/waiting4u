@@ -299,7 +299,7 @@ button {
 }
 
 /* Navbar */
-.navbar {
+.myNavbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -316,18 +316,22 @@ button {
   display: flex;
 }
 
-.navbar a {
+.myNavbar text {
   color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
 
-.navbar a:hover {
+.myNavbar a:hover {
   color: var(--primary-color);
 }
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff
 }
 
 /* Landing Page */
