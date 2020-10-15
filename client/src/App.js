@@ -8,6 +8,7 @@ import AdminRegister from "./components/auth/AdminRegister";
 import Login from "./components/auth/Login";
 import Alert from "./components/layout/Alert";
 import AdminDashboard from "./components/dashboard/AdminDashboard";
+import ManagePets from "./components/dashboard/ManagePets";
 import PrivateRoute from "./components/routing/PrivateRoute";
 // Redux
 import { Provider } from "react-redux";
@@ -39,6 +40,7 @@ const App = () => {
               <Route exact path="/login" component={Login} />
               <Route exact path="/aboutus" component={AboutUs} />
               <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />
+              <PrivateRoute exact path="/managepets" component={ManagePets} />
             </Switch>
           </section>
         </Fragment>

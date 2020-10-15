@@ -28,7 +28,7 @@ const AdminDashboard = ({
             <Button href="#!">Create New Pet Profile</Button>
           </Col>
           <Col>
-            <Button href="#!">Manage Pet Profiles</Button>
+            <Button href="/managepets">Manage Pet Profiles</Button>
           </Col>
         </Row>
       </Container>
@@ -39,7 +39,7 @@ const AdminDashboard = ({
 AdminDashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  adminProfile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
