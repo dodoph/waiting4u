@@ -3,17 +3,20 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+import { NavDropdown } from "react-bootstrap";
 
 export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-  const authLinks = (
+  const adminAuthLinks = (
     <ul>
       <li>
-        <Link to="#!">Pets</Link>
+        <NavDropdown title="Hi, Admin " id="basic-nav-dropdown">
+          <NavDropdown.Item href="#!">Profile</NavDropdown.Item>
+          <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
+        </NavDropdown>
       </li>
       <li>
         <a onClick={logout} href="#!">
-          <i className="fas fa-sign-out-alt"></i>
-          <span className="hide-sm">Logout</span>
+          <i className="fas fa-sign-out-alt"></i> Logout
         </a>
       </li>
     </ul>
@@ -43,8 +46,8 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className="fas fa-paw"></i> Waiting4U
         </Link>
       </h1>
-      {(!loading || loading) && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+      {!loading && (
+        <Fragment>{isAuthenticated ? adminAuthLinks : guestLinks}</Fragment>
       )}
     </nav>
   );

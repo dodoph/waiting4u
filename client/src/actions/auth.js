@@ -21,19 +21,19 @@ export const loadUser = () => async (dispatch) => {
     type: AUTH_ERROR,
   });
 
-  // try {
-  //   // const res = await axios.get('/api/auth');
-  //   const placeholder = { token: "token-placeholder" };
-  //   const res = { data: placeholder };
-  //   dispatch({
-  //     type: USER_LOADED,
-  //     payload: res.data,
-  //   });
-  // } catch (error) {
-  //   dispatch({
-  //     type: AUTH_ERROR,
-  //   });
-  // }
+  try {
+    // const res = await axios.get('/api/auth');
+    const placeholder = { token: "token-placeholder" };
+    const res = { data: placeholder };
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
 };
 
 // Register Admin
