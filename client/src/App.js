@@ -16,15 +16,16 @@ import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from './utils/setAuthToken';
 import "./App.css";
+import AdminLogin from "./components/auth/AdminLogin";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // }, []);
 
   return (
     <Provider store={store}>
@@ -37,6 +38,7 @@ const App = () => {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/adminregister" component={AdminRegister} />
+              <Route exact path="/adminlogin" component={AdminLogin} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/aboutus" component={AboutUs} />
               <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />

@@ -1,0 +1,1 @@
+export const URL_HOST = 'https://waiting4u-292919.uc.r.appspot.com';

@@ -10,54 +10,30 @@ import {
   AUTH_ERROR,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
-
-// Load User
-export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
-  dispatch({
-    type: AUTH_ERROR,
-  });
-
-  try {
-    // const res = await axios.get('/api/auth');
-    const placeholder = { token: "token-placeholder" };
-    const res = { data: placeholder };
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-};
+import { URL_HOST } from "../constant";
 
 // Register Admin
-export const adminregister = ({ username, email, password }) => async (
+export const adminRegister = ({ admin_name, email, password }) => async (
   dispatch
 ) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   };
 
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify({ admin_name, password, email });
 
   try {
-    // const res = await axios.post('/api/admins', body, config);
-    const placeholder = { token: "token-placeholder" };
-    const res = { data: placeholder };
+    const res = await axios.post(`${URL_HOST}/admins`, body, config);
+    console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-
-    dispatch(loadUser());
+    
+    // dispatch(loadUser(res.admin_id));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -67,6 +43,59 @@ export const adminregister = ({ username, email, password }) => async (
 
     dispatch({
       type: REGISTER_FAIL,
+    });
+  }
+};
+
+// Login Admin
+export const adminLogin = (email, password) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  try {
+    const admin_id = "123456";
+    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(loadAdmin(admin_id));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
+
+// Load Admin
+export const loadAdmin = (admin_id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
     });
   }
 };
@@ -133,6 +162,26 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_FAIL,
+    });
+  }
+};
+
+// Load User
+export const loadUser= (user_id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    const res = await axios.get(`${URL_HOST}/admins/${user_id}`, config);
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
     });
   }
 };
