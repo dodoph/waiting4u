@@ -6,7 +6,7 @@ export const AboutUs = () => {
     <div>
       <section className="about-us">
         <div className="container">
-          <h1 className="lead text-center">About “Waiting4U”</h1>
+          <h1 className="lead mytext-center">About “Waiting4U”</h1>
           <img src={logo} className="center" />
           <div className="container">
             <p>

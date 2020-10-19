@@ -29,7 +29,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
     if (password)
       if (password !== password2) {
-        setAlert("Password doesn't match", "danger");
+        setAlert("Passwords don't match", "danger");
         console.log("Password doesn't match");
       } else {
         register({ username, email, password });

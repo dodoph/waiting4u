@@ -22,9 +22,15 @@ const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    // Validate password patten
+    var password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+    if (!password.match(password_requirements)) {
+      setAlert("Invalid Password.", "danger");
+      console.log("Invalid Password.");
+    }
     if (password !== password2 || code !== "admin") {
       setAlert(
-        "Password doesn't match or invalid verification code!",
+        "Passwords don't match or invalid verification code!",
         "danger"
       );
       console.log("password doesn't match");
@@ -35,9 +41,9 @@ const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
   };
 
 //   Redirect if is authenticated
-  if(isAuthenticated) {
-      return <Redirect to="/admindashboard" />
-  }
+  // if(isAuthenticated) {
+  //     return <Redirect to="/admindashboard" />
+  // }
 
   return (
     <Fragment>
