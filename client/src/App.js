@@ -14,7 +14,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
-import setAuthToken from './utils/setAuthToken';
+import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import AdminLogin from "./components/auth/AdminLogin";
 
@@ -33,6 +33,7 @@ const App = () => {
         <Fragment>
           <MyNavbar />
           <Route exact path="/" component={Landing} />
+          <Route exact path="/aboutus" component={AboutUs} />
           <section className="container">
             <Alert />
             <Switch>
@@ -40,8 +41,11 @@ const App = () => {
               <Route exact path="/adminregister" component={AdminRegister} />
               <Route exact path="/adminlogin" component={AdminLogin} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/aboutus" component={AboutUs} />
-              <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />
+              <PrivateRoute
+                exact
+                path="/admindashboard"
+                component={AdminDashboard}
+              />
               <PrivateRoute exact path="/managepets" component={ManagePets} />
             </Switch>
           </section>

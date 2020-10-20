@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { URL_HOST } from '../constant';
 
 import {
     GET_PROFILE,
@@ -9,7 +10,7 @@ import {
 // Get current user profile
 export const getCurrentProfile = () => async dispatch => {
     try {
-        // const res = await axios.get('/api/profile/me');
+        // const res = await axios.get(`${URL_HOST}/admins/`);
         const res = { "username": "Kiwi Admin", "email": "kiwi@waiting4u.com" }; 
         dispatch({
             type: GET_PROFILE,

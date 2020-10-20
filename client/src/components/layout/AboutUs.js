@@ -3,9 +3,9 @@ import logo from "../../../src/img/take-me-home-logo.jpg";
 
 export const AboutUs = () => {
   return (
-    <div>
-      <section className="about-us">
-        <div className="container">
+    <section className="about-us">
+      <div className="dark-overlay">
+        <div className="about-us-inner">
           <h1 className="lead mytext-center">About “Waiting4U”</h1>
           <img src={logo} className="center" />
           <div className="container">
@@ -24,8 +24,8 @@ export const AboutUs = () => {
             </p>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
