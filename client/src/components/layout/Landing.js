@@ -1,14 +1,35 @@
 import React from "react";
+import {
+  Col,
+  Container,
+  Row,
+  Button,
+  Dropdown,
+  DropdownButton,
+  Form,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MyCarousel from "../landing/MyCarousel";
+import Search from "../landing/Search";
 
 export const Landing = () => {
   return (
-    <div className="container">
-      <div className="myCarousel">
-        <MyCarousel />
-      </div>
-    </div>
+    <Container>
+      <Row>
+        <div className="myCarousel">
+          <MyCarousel />
+        </div>
+      </Row>
+
+      <Container>
+        <Row>
+            <Search />
+          {/* <Col xs={12} md={8}>
+            xs=12 md=8
+          </Col> */}
+        </Row>
+      </Container>
+    </Container>
 
     // <section className="landing">
     //   <MyCarousel />

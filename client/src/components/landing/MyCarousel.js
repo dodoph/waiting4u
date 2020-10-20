@@ -24,7 +24,7 @@ export const MyCarousel = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="myCarousel-item"
           src={img2}
           alt="Third slide"
         />
@@ -36,7 +36,7 @@ export const MyCarousel = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="myCarousel-item"
           src={img3}
           alt="Third slide"
         />

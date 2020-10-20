@@ -354,11 +354,12 @@ button {
   text-align: center;
 }
 
-.myCarousel {
-  width: 100%;
-  height: 400px;
-  max-width: 100%;
+.myCarousel-item {
+  width: 90%;
   max-height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Profiles Page */
