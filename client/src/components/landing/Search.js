@@ -7,7 +7,7 @@ import { Col, Row, Form, Button } from "react-bootstrap";
 
 export const Search = () => {
   return (
-    <Col xs={12} md={4} lg={4}>
+    <Col xs={12} md={3} lg={3}>
     <Form>
         <Row>Search by</Row>
         <Row>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
-import { Nav, Navbar, NavDropdown, Dropdown } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 
 export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const adminAuthLinks = (
@@ -30,11 +30,15 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <Navbar fixed="top" className="myNavbar bg-dark">
-      <h2><Link to="/"><i className="fas fa-paw"></i> Waiting4U</Link></h2>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        {!loading && isAuthenticated ? adminAuthLinks : guestLinks}
-      </Navbar.Collapse>
+        <h2>
+          <Link to="/">
+            <i className="fas fa-paw"></i> Waiting4U
+          </Link>
+        </h2>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          {!loading && isAuthenticated ? adminAuthLinks : guestLinks}
+        </Navbar.Collapse>
     </Navbar>
   );
 };

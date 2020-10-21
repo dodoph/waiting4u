@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import MyCarousel from "../landing/MyCarousel";
 import Search from "../landing/Search";
+import MyCards from "../landing/MyCards";
 
 export const Landing = () => {
   return (
@@ -24,9 +25,7 @@ export const Landing = () => {
       <Container>
         <Row>
             <Search />
-          {/* <Col xs={12} md={8}>
-            xs=12 md=8
-          </Col> */}
+            <MyCards />
         </Row>
       </Container>
     </Container>
