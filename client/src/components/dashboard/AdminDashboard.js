@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import { getCurrentAdminProfile } from "../../actions/profile";
+import { loadAdmin } from "../../actions/auth";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 const AdminDashboard = ({

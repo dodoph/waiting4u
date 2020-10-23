@@ -14,17 +14,24 @@ import {
 import setAuthToken from "../utils/setAuthToken";
 import { URL_HOST } from "../constant";
 
+// Global config settings
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  }
+}
+
+const getConfig = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  }
+}
+
 // Register Admin
 export const adminRegister = ({ admin_name, email, password }) => async (
   dispatch
-) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
-
+) => {  
   const body = JSON.stringify({ admin_name, password, email });
 
   try {
@@ -35,7 +42,7 @@ export const adminRegister = ({ admin_name, email, password }) => async (
       payload: res.data,
     });
     
-    dispatch(loadAdmin(res.data.admin_id));
+    // dispatch(loadAdmin(res.data.admin_id));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -51,24 +58,18 @@ export const adminRegister = ({ admin_name, email, password }) => async (
 
 // Login Admin
 export const adminLogin = (email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
 
   const body = JSON.stringify({ email, password });
 
   try {
-    const admin_id = "5704568633556992";
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
+    const res = await axios.post(`${URL_HOST}/admins/login`, body, config);
+    console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
 
-    dispatch(loadAdmin(admin_id));
+    dispatch(loadAdmin(res.data.admin_id));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -85,12 +86,8 @@ export const adminLogin = (email, password) => async (dispatch) => {
 // Load Admin
 export const loadAdmin = (admin_id) => async (dispatch) => {
   try {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
+    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, getConfig);
+    console.log(res);
     dispatch({
       type: ADMIN_LOADED,
       payload: res.data,
@@ -104,11 +101,6 @@ export const loadAdmin = (admin_id) => async (dispatch) => {
 
 // Register User
 export const register = ({ username, email, password }) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   const body = JSON.stringify({ username, email, password });
 
@@ -137,11 +129,6 @@ export const register = ({ username, email, password }) => async (dispatch) => {
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
 
   const body = JSON.stringify({ email, password });
 
@@ -171,12 +158,7 @@ export const login = (email, password) => async (dispatch) => {
 // Load User
 export const loadUser= (user_id) => async (dispatch) => {
   try {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    const res = await axios.get(`${URL_HOST}/admins/${user_id}`, config);
+    const res = await axios.get(`${URL_HOST}/admins/${user_id}`, getConfig);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
