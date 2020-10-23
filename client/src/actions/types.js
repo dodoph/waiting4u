@@ -10,7 +10,9 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 export const USER_LOADED = 'USER_LOADED';
+export const ADMIN_LOADED = 'ADMIN_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 
 export const GET_PROFILE = 'GET_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';

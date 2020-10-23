@@ -13,7 +13,6 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
-        {" "}
         <i className="fas fa-sign-out-alt"></i> Logout
       </Nav.Link>
     </Nav>
@@ -37,7 +36,7 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </h2>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {!loading && isAuthenticated ? adminAuthLinks : guestLinks}
+          {isAuthenticated ? adminAuthLinks : guestLinks}
         </Navbar.Collapse>
     </Navbar>
   );
@@ -45,11 +44,11 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 MyNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { logout })(MyNavbar);

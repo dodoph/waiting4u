@@ -48,9 +48,9 @@ const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
   };
 
   // Redirect if is authenticated
-  // if(isAuthenticated) {
-  //     return <Redirect to="/admindashboard" />
-  // }
+  if(isAuthenticated) {
+      return <Redirect to="/admindashboard" />
+  }
 
   return (
     <Fragment>

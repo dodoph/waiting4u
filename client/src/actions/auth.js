@@ -7,7 +7,9 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   USER_LOADED,
+  ADMIN_LOADED,
   AUTH_ERROR,
+  CLEAR_PROFILE
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import { URL_HOST } from "../constant";
@@ -33,7 +35,7 @@ export const adminRegister = ({ admin_name, email, password }) => async (
       payload: res.data,
     });
     
-    // dispatch(loadUser(res.admin_id));
+    dispatch(loadAdmin(res.data.admin_id));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -59,7 +61,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    const admin_id = "123456";
+    const admin_id = "5704568633556992";
     const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
     dispatch({
       type: LOGIN_SUCCESS,
@@ -90,7 +92,7 @@ export const loadAdmin = (admin_id) => async (dispatch) => {
     };
     const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
     dispatch({
-      type: USER_LOADED,
+      type: ADMIN_LOADED,
       payload: res.data,
     });
   } catch (error) {
@@ -188,5 +190,6 @@ export const loadUser= (user_id) => async (dispatch) => {
 
 // Logout/Clear profile
 export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };

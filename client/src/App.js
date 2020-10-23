@@ -13,10 +13,12 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
-import { loadUser } from "./actions/auth";
+import { loadAdmin, loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import AdminLogin from "./components/auth/AdminLogin";
+import { AdminEditProfile } from "./components/dashboard/AdminEditProfile";
+import { AddNewPet } from "./components/dashboard/AddNewPet";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -24,7 +26,7 @@ if (localStorage.token) {
 
 const App = () => {
   // useEffect(() => {
-  //   store.dispatch(loadUser());
+  //   store.dispatch(loadAdmin());
   // }, []);
 
   return (
@@ -41,6 +43,8 @@ const App = () => {
               <Route exact path="/adminregister" component={AdminRegister} />
               <Route exact path="/adminlogin" component={AdminLogin} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/admineditprofile" component={AdminEditProfile} />
+              <Route exact path="/addnewpet" component={AddNewPet} />
               <PrivateRoute
                 exact
                 path="/admindashboard"

@@ -21,10 +21,10 @@ const AdminLogin = ({ adminLogin, isAuthenticated }) => {
     adminLogin(email, password);
   };
 
-  // Redirect if logged in
-  // if(isAuthenticated) {
-  //     return <Redirect to="/dashboard" />
-  // }
+// Redirect if logged in
+  if(isAuthenticated) {
+      return <Redirect to="/admindashboard" />
+  }
 
   return (
     <Fragment>

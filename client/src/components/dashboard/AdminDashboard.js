@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentAdminProfile } from "../../actions/profile";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 const AdminDashboard = ({
-  getCurrentProfile,
-  auth,
+  getCurrentAdminProfile,
+  auth: { user },
   adminProfile: { adminProfile, loading },
 }) => {
   useEffect(() => {
-    getCurrentProfile();
+    getCurrentAdminProfile();
   }, []);
 
   return loading && adminProfile === null ? (
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => ({
   adminProfile: state.adminProfile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(AdminDashboard);
+export default connect(mapStateToProps, { getCurrentAdminProfile })(AdminDashboard);

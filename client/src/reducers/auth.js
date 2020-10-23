@@ -5,6 +5,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   USER_LOADED,
+  ADMIN_LOADED,
   AUTH_ERROR
 } from "../actions/types";
 
@@ -20,6 +21,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case USER_LOADED:
+    case ADMIN_LOADED:
       return {
         ...state,
         isAuthenticated: true,
@@ -33,7 +35,7 @@ export default function (state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: true,
-        laoding: false,
+        loading: false,
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -44,7 +46,7 @@ export default function (state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
-        laoding: false,
+        loading: false,
       };
     default:
       return state;

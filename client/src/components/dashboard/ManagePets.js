@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentAdminProfile } from "../../actions/profile";
 import { Table, Button, Container, Row, Col } from "react-bootstrap";
 
 const ManagePets = ({
@@ -11,9 +11,9 @@ const ManagePets = ({
   auth,
   adminProfile: { adminProfile, loading },
 }) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
+  // useEffect(() => {
+  //   getCurrentProfile();
+  // }, []);
 
   return loading && adminProfile === null ? (
     <Spinner />
@@ -58,7 +58,7 @@ const ManagePets = ({
 };
 
 ManagePets.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  getCurrentAdminProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   adminProfile: PropTypes.object.isRequired,
 };
@@ -68,4 +68,4 @@ const mapStateToProps = (state) => ({
   adminProfile: state.adminProfile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(ManagePets);
+export default connect(mapStateToProps, { getCurrentAdminProfile })(ManagePets);
