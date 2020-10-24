@@ -2,15 +2,23 @@
   "name": "waiting4u",
   "version": "1.0.0",
   "description": "capstone",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
+    "bootstrap": "^4.5.3",
+    "client": "file:client",
     "express": "^4.17.1",
-    "nodemon": "^2.0.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-bootstrap": "^1.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

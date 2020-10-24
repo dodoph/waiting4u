@@ -11,15 +11,7 @@ app.get('/', (req, res) => {
     res.send('<h1>Welcome!!</h1>');
 });
 
-app.get('/login', (req, res) => {
-    res.send('<h1>This will be a login page!<h1>')
-});
-
-app.get('/logout', (req, res) => {
-    res.redirect('/');
-});
-
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 5000
 app.listen(port, function(req, res){
 	console.log('Server Has Started at port ' + port + '!');	
 });
