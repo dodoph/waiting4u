@@ -9,9 +9,8 @@ import {
   USER_LOADED,
   ADMIN_LOADED,
   AUTH_ERROR,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
 } from "./types";
-import setAuthToken from "../utils/setAuthToken";
 import { URL_HOST } from "../constant";
 
 // Global config settings
@@ -19,19 +18,19 @@ const config = {
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-  }
-}
+  },
+};
 
 const getConfig = {
   headers: {
     "Access-Control-Allow-Origin": "*",
-  }
-}
+  },
+};
 
 // Register Admin
 export const adminRegister = ({ admin_name, email, password }) => async (
   dispatch
-) => {  
+) => {
   const body = JSON.stringify({ admin_name, password, email });
 
   try {
@@ -39,10 +38,10 @@ export const adminRegister = ({ admin_name, email, password }) => async (
     console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.admin_id },
     });
-    
-    // dispatch(loadAdmin(res.data.admin_id));
+
+    // dispatch(loadAdmin(user_id));
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -58,7 +57,6 @@ export const adminRegister = ({ admin_name, email, password }) => async (
 
 // Login Admin
 export const adminLogin = (email, password) => async (dispatch) => {
-
   const body = JSON.stringify({ email, password });
 
   try {
@@ -66,7 +64,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.admin_id },
     });
 
     dispatch(loadAdmin(res.data.admin_id));
@@ -84,14 +82,16 @@ export const adminLogin = (email, password) => async (dispatch) => {
 };
 
 // Load Admin
-export const loadAdmin = (admin_id) => async (dispatch) => {
+export const loadAdmin = (admin_id = null) => async (dispatch) => {
   try {
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, getConfig);
-    console.log(res);
-    dispatch({
-      type: ADMIN_LOADED,
-      payload: res.data,
-    });
+    if (admin_id) {
+      const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, getConfig);
+      console.log(res);
+      dispatch({
+        type: ADMIN_LOADED,
+        payload: res.data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -101,7 +101,6 @@ export const loadAdmin = (admin_id) => async (dispatch) => {
 
 // Register User
 export const register = ({ username, email, password }) => async (dispatch) => {
-
   const body = JSON.stringify({ username, email, password });
 
   try {
@@ -129,7 +128,6 @@ export const register = ({ username, email, password }) => async (dispatch) => {
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-
   const body = JSON.stringify({ email, password });
 
   try {
@@ -156,7 +154,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 // Load User
-export const loadUser= (user_id) => async (dispatch) => {
+export const loadUser = (user_id) => async (dispatch) => {
   try {
     const res = await axios.get(`${URL_HOST}/admins/${user_id}`, getConfig);
     dispatch({

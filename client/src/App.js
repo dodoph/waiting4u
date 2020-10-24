@@ -13,21 +13,21 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
-import { loadAdmin, loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import AdminLogin from "./components/auth/AdminLogin";
 import { AdminEditProfile } from "./components/dashboard/AdminEditProfile";
 import { AddNewPet } from "./components/dashboard/AddNewPet";
+import { loadAdmin } from "../src/actions/auth";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  // useEffect(() => {
-  //   store.dispatch(loadAdmin());
-  // }, []);
+  useEffect(() => {
+    store.dispatch(loadAdmin(localStorage.getItem("token")));
+  }, []);
 
   return (
     <Provider store={store}>

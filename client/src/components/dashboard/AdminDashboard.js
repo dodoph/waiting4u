@@ -9,14 +9,15 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 
 const AdminDashboard = ({
   getCurrentAdminProfile,
-  auth: { user },
-  adminProfile: { adminProfile, loading },
+  auth: { user, isAuthenticated, loading },
+  // adminProfile: { adminProfile, loading },
 }) => {
   useEffect(() => {
     getCurrentAdminProfile();
+    // loadAdmin(localStorage.getItem("token"));
   }, []);
 
-  return loading && adminProfile === null ? (
+  return loading && user === null ? (
     <Spinner />
   ) : (
     <Fragment>

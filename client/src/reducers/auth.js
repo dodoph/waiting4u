@@ -6,10 +6,13 @@ import {
   LOGOUT,
   USER_LOADED,
   ADMIN_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  GET_PROFILE, 
+  PROFILE_ERROR
 } from "../actions/types";
 
 const initialState = {
+  // TODO: token will be saved as a JWT token, so now it is a user id
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
@@ -22,6 +25,7 @@ export default function (state = initialState, action) {
   switch (type) {
     case USER_LOADED:
     case ADMIN_LOADED:
+    case GET_PROFILE:
       return {
         ...state,
         isAuthenticated: true,
@@ -47,6 +51,7 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: null,
       };
     default:
       return state;

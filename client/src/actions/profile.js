@@ -12,12 +12,14 @@ export const getCurrentAdminProfile = () => async (dispatch) => {
         "Access-Control-Allow-Origin": "*",
       },
     };
-    const admin_id = "5704568633556992";
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data,
-    });
+    const admin_id = localStorage.getItem("token");
+    if (admin_id) {
+      const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, config);
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
