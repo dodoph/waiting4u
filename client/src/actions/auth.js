@@ -100,16 +100,16 @@ export const loadAdmin = (admin_id = null) => async (dispatch) => {
 };
 
 // Register User
-export const register = ({ username, email, password }) => async (dispatch) => {
-  const body = JSON.stringify({ username, email, password });
+export const register = ({ user_name, email, password, introduction }) => async (dispatch) => {
+  const body = JSON.stringify({ user_name, email, password, introduction });
 
   try {
-    // const res = await axios.post('/api/users', body, config);
-    const placeholder = { token: "token-placeholder" };
-    const res = { data: placeholder };
+    const res = await axios.post(`${URL_HOST}/users`, body, config);
+    //const placeholder = { token: "token-placeholder" };
+    //const res = { data: placeholder };
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.user_id },
     });
 
     dispatch(loadUser());
@@ -156,7 +156,7 @@ export const login = (email, password) => async (dispatch) => {
 // Load User
 export const loadUser = (user_id) => async (dispatch) => {
   try {
-    const res = await axios.get(`${URL_HOST}/admins/${user_id}`, getConfig);
+    const res = await axios.get(`${URL_HOST}/users/${user_id}`, getConfig);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
