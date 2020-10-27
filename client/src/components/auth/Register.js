@@ -24,7 +24,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     // Validate user_name patten
-    var user_name_requirements = /^[0-9a-zA-Z]+$/;
+    var user_name_requirements = /^[A-Za-z][0-9a-zA-Z]+$/;
     // Validate password patten
     var password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
     if (!user_name.match(user_name_requirements)) {

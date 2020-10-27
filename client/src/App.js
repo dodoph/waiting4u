@@ -10,6 +10,7 @@ import Alert from "./components/layout/Alert";
 import AdminDashboard from "./components/dashboard/AdminDashboard";
 import ManagePets from "./components/dashboard/ManagePets";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import UserDashboard from "./components/dashboard/UserDashboard";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -19,6 +20,8 @@ import AdminLogin from "./components/auth/AdminLogin";
 import { AdminEditProfile } from "./components/dashboard/AdminEditProfile";
 import { AddNewPet } from "./components/dashboard/AddNewPet";
 import { loadAdmin } from "../src/actions/auth";
+import { UserEditProfile } from "./components/dashboard/UserEditProfile";
+import { loadUser } from "../src/actions/auth";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -27,6 +30,10 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadAdmin(localStorage.getItem("token")));
+  }, []);
+
+  useEffect(() => {
+    store.dispatch(loadUser(localStorage.getItem("token")));
   }, []);
 
   return (
@@ -44,6 +51,7 @@ const App = () => {
               <Route exact path="/adminlogin" component={AdminLogin} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/admineditprofile" component={AdminEditProfile} />
+              <Route exact path="/usereditprofile" component={UserEditProfile} />
               <Route exact path="/addnewpet" component={AddNewPet} />
               <PrivateRoute
                 exact
@@ -51,6 +59,7 @@ const App = () => {
                 component={AdminDashboard}
               />
               <PrivateRoute exact path="/managepets" component={ManagePets} />
+              <PrivateRoute exact path="/userdashboard" component={UserDashboard} />
             </Switch>
           </section>
         </Fragment>
