@@ -8,6 +8,7 @@ import AdminRegister from "./components/auth/AdminRegister";
 import Login from "./components/auth/Login";
 import Alert from "./components/layout/Alert";
 import AdminDashboard from "./components/dashboard/AdminDashboard";
+import CreatePetProfile from "./components/dashboard/CreatePetProfile";
 import ManagePets from "./components/dashboard/ManagePets";
 import PrivateRoute from "./components/routing/PrivateRoute";
 // Redux
@@ -17,7 +18,6 @@ import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import AdminLogin from "./components/auth/AdminLogin";
 import { AdminEditProfile } from "./components/dashboard/AdminEditProfile";
-import { AddNewPet } from "./components/dashboard/AddNewPet";
 import { loadAdmin } from "../src/actions/auth";
 
 if (localStorage.token) {
@@ -44,7 +44,7 @@ const App = () => {
               <Route exact path="/adminlogin" component={AdminLogin} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/admineditprofile" component={AdminEditProfile} />
-              <Route exact path="/addnewpet" component={AddNewPet} />
+              <PrivateRoute exact path="/create-pet-profile" component={CreatePetProfile} />
               <PrivateRoute
                 exact
                 path="/admindashboard"

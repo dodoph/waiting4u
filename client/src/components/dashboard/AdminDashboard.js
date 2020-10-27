@@ -27,7 +27,7 @@ const AdminDashboard = ({
       <Container>
         <Row >
           <Col>
-            <Button href="#!">Create New Pet Profile</Button>
+            <Button href="/create-pet-profile">Create New Pet Profile</Button>
           </Col>
           <Col>
             <Button href="/managepets">Manage Pet Profiles</Button>
