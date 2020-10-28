@@ -1,8 +1,4 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { logout } from "../../actions/auth";
+import React from "react";
 import { Carousel } from "react-bootstrap";
 import img1 from "../../img/carousels-img1.jpg";
 import img2 from "../../img/carousels-img2.jpg";

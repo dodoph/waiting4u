@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { Link } from "react-router-dom";
 import { getCurrentAdminProfile } from "../../actions/profile";
-import { Table, Button, Container, Row, Col } from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 
 const ManagePets = ({
   getCurrentProfile,

@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { loadAdmin } from "../../actions/auth";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import CreatePetProfile from "./CreatePetProfile";
 
 const AdminDashboard = ({
   auth: { user, loading },

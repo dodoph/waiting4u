@@ -7,7 +7,7 @@ export const AboutUs = () => {
       <div className="dark-overlay">
         <div className="about-us-inner">
           <h1 className="lead mytext-center">About “Waiting4U”</h1>
-          <img src={logo} className="center" />
+          <img src={logo} className="center" alt="take-me-home-logo"/>
           <div className="container">
             <p>
               What better way to match future pet owners up with available

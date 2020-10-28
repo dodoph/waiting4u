@@ -101,7 +101,7 @@ export const loadAdmin = (admin_id = null) => async (dispatch) => {
 
 // Register User
 export const register = ({ username, email, password }) => async (dispatch) => {
-  const body = JSON.stringify({ username, email, password });
+  // const body = JSON.stringify({ username, email, password });
 
   try {
     // const res = await axios.post('/api/users', body, config);
@@ -128,7 +128,7 @@ export const register = ({ username, email, password }) => async (dispatch) => {
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-  const body = JSON.stringify({ email, password });
+  // const body = JSON.stringify({ email, password });
 
   try {
     // const res = await axios.post('/api/login', body, config);

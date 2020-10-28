@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Button,
-  Dropdown,
-  DropdownButton,
-  Form,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
 import MyCarousel from "../landing/MyCarousel";
 import Search from "../landing/Search";
 import MyCards from "../landing/MyCards";
@@ -24,8 +15,8 @@ export const Landing = () => {
 
       <Container>
         <Row>
-            <Search />
-            <MyCards />
+          <Search />
+          <MyCards />
         </Row>
       </Container>
     </Container>

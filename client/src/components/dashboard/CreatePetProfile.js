@@ -1,7 +1,7 @@
-import React, { Fragment, useState, Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Form, Col, Row, Button, Container } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 import { createPetProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 
@@ -16,14 +16,6 @@ const initialState = {
   dispositions: "",
   description: "",
   admin: "",
-};
-
-const typeAndBreed = {
-  type: [
-    { name: "dog", breed: ["brittnary", "german"] },
-    { name: "cat", breed: ["maincoon", "pp cat"] },
-    { name: "other", breed: ["Other"] },
-  ],
 };
 
 const types = ["dog", "cat", "other"];
@@ -66,6 +58,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     description,
     admin,
   } = formData;
+
+  setFormData(admin, localStorage.getItem("token"));
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -149,7 +143,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             Breed
           </Form.Label>
           <Col sm={10}>
-            {type == "dog" && (
+            {type === "dog" && (
               <Form.Control
                 as="select"
                 name="breed"
@@ -161,7 +155,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 ))}
               </Form.Control>
             )}
-            {type == "cat" && (
+            {type === "cat" && (
               <Form.Control
                 as="select"
                 name="breed"
@@ -173,7 +167,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 ))}
               </Form.Control>
             )}
-            {type == "other" && (
+            {type === "other" && (
               <Form.Control
                 as="select"
                 name="breed"
@@ -224,23 +218,26 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
-            Despositions
+            Dispositions
           </Form.Label>
           <Col sm={10}>
             <Form.Check
               type="checkbox"
               label="Good with other animals"
-              name="despositions"
+              name="dispositions"
+              value={dispositions}
             />
             <Form.Check
               type="checkbox"
               label="Good with children"
-              name="despositions"
+              name="dispositions"
+              value={dispositions}
             />
             <Form.Check
               type="checkbox"
               label="Animal must be leashed at all times"
-              name="despositions"
+              value="dispositions"
+              name={dispositions}
             />
           </Col>
         </Form.Group>
@@ -269,12 +266,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             Admin
           </Form.Label>
           <Col sm={10}>
-            <Form.Control
-              type="text"
-              name="admin"
-              value={localStorage.getItem("token")}
-              disabled
-            />
+            <Form.Control type="text" name="admin" value={admin} disabled />
           </Col>
         </Form.Group>
 

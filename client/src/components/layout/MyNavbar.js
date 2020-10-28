@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const adminAuthLinks = (
