@@ -10,21 +10,26 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 const UserDashboard = ({
   getCurrentUserProfile,
   auth: { user, isAuthenticated, loading },
-  // adminProfile: { adminProfile, loading },
 }) => {
   useEffect(() => {
     getCurrentUserProfile();
-    // loadAdmin(localStorage.getItem("token"));
   }, []);
 
   return loading && user === null ? (
     <Spinner />
   ) : (
-    <Fragment>
-      <Container >
-        <h1 className="large mytext-primary mytext-center">User Dashboard</h1>
-      </Container>
-     </Fragment>
+      <Fragment>
+        <Container >
+          <h1 className="large mytext-primary mytext-center">User Dashboard</h1>
+        </Container>
+        <Container>
+          <Row >
+            <Col>
+              <Button href="/usereditprofile">View/Update Profile</Button>
+            </Col>
+          </Row>
+        </Container>
+      </Fragment>
   );
 };
 

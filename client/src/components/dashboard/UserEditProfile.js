@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Button, Col, Row} from "react-bootstrap";
 
 export const UserEditProfile = () => {
     return (
         <div>
-            Edit User Profile
+            Update Profile
+            Manage Preference
         </div>
     )
 }

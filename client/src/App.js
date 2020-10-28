@@ -59,7 +59,7 @@ const App = () => {
                 component={AdminDashboard}
               />
               <PrivateRoute exact path="/managepets" component={ManagePets} />
-              <PrivateRoute exact path="/userdashboard" component={UserDashboard} />
+              <PrivateRoute exact path="/dashboard" component={UserDashboard} />
             </Switch>
           </section>
         </Fragment>

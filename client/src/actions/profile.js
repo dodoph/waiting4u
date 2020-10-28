@@ -40,6 +40,7 @@ export const getCurrentUserProfile = () => async (dispatch) => {
       },
     };
     const user_id = localStorage.getItem("token");
+    console.log(user_id);
     if (user_id) {
       const res = await axios.get(`${URL_HOST}/users/${user_id}`, config);
       dispatch({
