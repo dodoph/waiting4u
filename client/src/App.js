@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MyNavbar from "./components/layout/MyNavbar";
 import Landing from "./components/layout/Landing";
 import Routes from "./components/routing/Routes";
-// Redux
-import { Provider } from "react-redux";
-import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import { loadAdmin } from "../src/actions/auth";
+
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
