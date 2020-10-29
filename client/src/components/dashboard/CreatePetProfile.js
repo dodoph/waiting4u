@@ -10,19 +10,22 @@ const initialState = {
   pet_name: "",
   image_url: "",
   date_of_birth: "",
-  type: "",
-  breed: "",
-  availability: "",
+  type: "dog",
+  breed: "Retrievers",
+  availability: "available",
   status: "",
-  dispositionOptions: [
-    {id: 1, value: "Good with other animals", isChecked: false},
-    {id: 2, value: "Good with children", isChecked: false},
-    {id: 3, value: "Animal must be leashed at all times", isChecked: false}
-  ],
   dispositions: [],
   description: "",
   admin: localStorage.getItem("token"),
 };
+
+const initialDispositions = {
+  dispositionOptions: [
+    {id: 1, value: "Good with other animals", isChecked: false},
+    {id: 2, value: "Good with children", isChecked: false},
+    {id: 3, value: "Animal must be leashed at all times", isChecked: false}
+  ]
+}
 
 const types = ["dog", "cat", "other"];
 const dogBreeds = [
@@ -51,7 +54,8 @@ const otherBreeds = ["Other"];
 
 const CreatePetProfile = ({ createPetProfile, history }) => {
   const [formData, setFormData] = useState(initialState);
-  
+  const [dispositionData, setDispositionData] = useState(initialDispositions);
+
   const {
     pet_name,
     image_url,
@@ -60,11 +64,12 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     breed,
     availability,
     status,
-    dispositionOptions,
     dispositions,
     description,
     admin,
   } = formData;
+
+  const {dispositionOptions} = dispositionData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -72,25 +77,26 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let finalDispositions = [];
-    let dispositionOptions = formData.dispositionOptions;
+    let dispositions = [];
+    let dispositionOptions = dispositionData.dispositionOptions;
     dispositionOptions.forEach(disposition => {
       if(disposition.isChecked) {
-        finalDispositions.push(disposition.value);
+        dispositions.push(disposition.value);
       }
     })
-    setFormData({ ...formData, dispositions: finalDispositions });
-    createPetProfile(formData, history);
+    const updatedFormData = { ...formData, dispositions: dispositions };
+    setFormData(updatedFormData);
+    createPetProfile(updatedFormData, history);
   };
 
   const handleCheckElement = (event) => {
-    let dispositionOptions = formData.dispositionOptions;
+    let dispositionOptions = dispositionData.dispositionOptions;
     dispositionOptions.forEach(disposition => {
       if(disposition.value === event.target.value) {
         disposition.isChecked = event.target.checked;
       }
     })
-    setFormData({...formData, dispositionOptions: dispositionOptions});
+    setDispositionData({dispositionOptions: dispositionOptions});
   }
 
   return (
@@ -244,7 +250,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             Despositions
           </Form.Label>
           <Col sm={10}>
-              {formData.dispositionOptions.map((disposition, id) => {
+              {dispositionData.dispositionOptions.map((disposition, id) => {
                 return (<CheckBox key={id} handleCheckElement={handleCheckElement} {...disposition} />)
               })}
           </Col>
