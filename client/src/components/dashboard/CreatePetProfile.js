@@ -45,7 +45,7 @@ const otherBreeds = ["Other"];
 
 const CreatePetProfile = ({ createPetProfile, history }) => {
   const [formData, setFormData] = useState(initialState);
-
+  
   const {
     pet_name,
     image_url,
@@ -58,8 +58,6 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     description,
     admin,
   } = formData;
-
-  setFormData(admin, localStorage.getItem("token"));
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -131,8 +129,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               onChange={onChange}
             >
               <option>-- Select Pet Type --</option>
-              {types.map((type) => (
-                <option>{type}</option>
+              {types.map((type, index) => (
+                <option key={index}>{type}</option>
               ))}
             </Form.Control>
           </Col>
@@ -218,26 +216,23 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
-            Dispositions
+            Despositions
           </Form.Label>
           <Col sm={10}>
             <Form.Check
               type="checkbox"
               label="Good with other animals"
-              name="dispositions"
-              value={dispositions}
+              name="despositions"
             />
             <Form.Check
               type="checkbox"
               label="Good with children"
-              name="dispositions"
-              value={dispositions}
+              name="despositions"
             />
             <Form.Check
               type="checkbox"
               label="Animal must be leashed at all times"
-              value="dispositions"
-              name={dispositions}
+              name="despositions"
             />
           </Col>
         </Form.Group>
@@ -266,7 +261,12 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             Admin
           </Form.Label>
           <Col sm={10}>
-            <Form.Control type="text" name="admin" value={admin} disabled />
+            <Form.Control
+              type="text"
+              name="admin"
+              value={admin}
+              disabled
+            />
           </Col>
         </Form.Group>
 
