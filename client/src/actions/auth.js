@@ -43,11 +43,7 @@ export const adminRegister = ({ admin_name, email, password }) => async (
 
     // dispatch(loadAdmin(user_id));
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: REGISTER_FAIL,
@@ -69,11 +65,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
 
     dispatch(loadAdmin(res.data.admin_id));
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: LOGIN_FAIL,

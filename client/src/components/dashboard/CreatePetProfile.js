@@ -148,8 +148,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 value={breed}
                 onChange={onChange}
               >
-                {dogBreeds.map((breed) => (
-                  <option>{breed}</option>
+                {dogBreeds.map((breed, index) => (
+                  <option key={index}>{breed}</option>
                 ))}
               </Form.Control>
             )}
@@ -160,8 +160,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 value={breed}
                 onChange={onChange}
               >
-                {catBreeds.map((breed) => (
-                  <option>{breed}</option>
+                {catBreeds.map((breed, index) => (
+                  <option key={index}>{breed}</option>
                 ))}
               </Form.Control>
             )}
@@ -172,8 +172,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 value={breed}
                 onChange={onChange}
               >
-                {otherBreeds.map((breed) => (
-                  <option>{breed}</option>
+                {otherBreeds.map((breed, index) => (
+                  <option key={index}>{breed}</option>
                 ))}
               </Form.Control>
             )}
