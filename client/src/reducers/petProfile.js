@@ -1,27 +1,25 @@
-import { CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR } from "../actions/types";
+import { GET_PET_PROFILE, CLEAR_PET_PROFILE, PROFILE_ERROR } from "../actions/types";
 
 const initialState = {
-  adminProfile: null,
-  pets: [],
+  petProfile: null,
   loading: true,
-  error: {},
+  error: null,
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PROFILE:
+    case GET_PET_PROFILE:
       return {
         ...state,
-        adminProfile: payload,
+        petProfile: payload,
         loading: false,
       };
-    case CLEAR_PROFILE:
+    case CLEAR_PET_PROFILE:
       return {
         ...state,
-        adminProfile: null,
-        pets: [],
+        petProfile: null,
         loading: false,
       };
     case PROFILE_ERROR:

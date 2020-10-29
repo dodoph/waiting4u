@@ -15,4 +15,6 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 
 export const GET_PROFILE = 'GET_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const GET_PET_PROFILE = 'GET_PET_PROFILE';
+export const CLEAR_PET_PROFILE = 'CLEAR_PET_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';

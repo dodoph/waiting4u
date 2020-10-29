@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { URL_HOST } from "../constant";
 
-import { GET_PROFILE, PROFILE_ERROR } from "./types";
+import { GET_PROFILE, PROFILE_ERROR, GET_PET_PROFILE } from "./types";
 
 // Global config settings
 const postConfig = {
@@ -42,24 +42,13 @@ export const createPetProfile = (formData, history) => async dispatch => {
   try {
     const admin_id = localStorage.getItem("token");
     const res = await axios.post(`${URL_HOST}/admins/${admin_id}/pets`,formData, postConfig);
-
     dispatch({
-      type: GET_PROFILE,
+      type: GET_PET_PROFILE,
       payload: res.data,
     });
-    
     dispatch(setAlert("Pet Profile Created", "success"));
     history.push("/admindashboard");
   } catch(err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    dispatch(setAlert(err.response.data.Error, "danger"));
   }
 }

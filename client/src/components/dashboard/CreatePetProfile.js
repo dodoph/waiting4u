@@ -14,11 +14,12 @@ const initialState = {
   breed: "",
   availability: "",
   status: "",
-  dispositions: [
+  dispositionOptions: [
     {id: 1, value: "Good with other animals", isChecked: false},
     {id: 2, value: "Good with children", isChecked: false},
     {id: 3, value: "Animal must be leashed at all times", isChecked: false}
   ],
+  dispositions: [],
   description: "",
   admin: localStorage.getItem("token"),
 };
@@ -59,6 +60,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     breed,
     availability,
     status,
+    dispositionOptions,
     dispositions,
     description,
     admin,
@@ -71,8 +73,8 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let finalDispositions = [];
-    let dispositions = formData.dispositions;
-    dispositions.forEach(disposition => {
+    let dispositionOptions = formData.dispositionOptions;
+    dispositionOptions.forEach(disposition => {
       if(disposition.isChecked) {
         finalDispositions.push(disposition.value);
       }
@@ -82,13 +84,13 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
   };
 
   const handleCheckElement = (event) => {
-    let dispositions = formData.dispositions;
-    dispositions.forEach(disposition => {
+    let dispositionOptions = formData.dispositionOptions;
+    dispositionOptions.forEach(disposition => {
       if(disposition.value === event.target.value) {
         disposition.isChecked = event.target.checked;
       }
     })
-    setFormData({...formData, dispositions: dispositions});
+    setFormData({...formData, dispositionOptions: dispositionOptions});
   }
 
   return (
@@ -236,36 +238,13 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             />
           </Col>
         </Form.Group>
-{/* 
-        <Form.Group as={Row}>
-          <Form.Label column sm={2}>
-            Despositions
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Check
-              type="checkbox"
-              label="Good with other animals"
-              name="despositions"
-            />
-            <Form.Check
-              type="checkbox"
-              label="Good with children"
-              name="despositions"
-            />
-            <Form.Check
-              type="checkbox"
-              label="Animal must be leashed at all times"
-              name="despositions"
-            />
-          </Col>
-        </Form.Group> */}
 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
             Despositions
           </Form.Label>
           <Col sm={10}>
-              {formData.dispositions.map((disposition, id) => {
+              {formData.dispositionOptions.map((disposition, id) => {
                 return (<CheckBox key={id} handleCheckElement={handleCheckElement} {...disposition} />)
               })}
           </Col>
