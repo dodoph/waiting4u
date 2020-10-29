@@ -106,11 +106,7 @@ export const register = ({ user_name, email, password, introduction }) => async 
 
     //dispatch(loadUser());
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: REGISTER_FAIL,
@@ -132,11 +128,7 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch(loadUser(res.data.user_id));
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: LOGIN_FAIL,
