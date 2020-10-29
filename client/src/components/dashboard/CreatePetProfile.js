@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import { createPetProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
+import CheckBox from "./CheckBox";
 
 const initialState = {
   pet_name: "",
@@ -13,9 +14,13 @@ const initialState = {
   breed: "",
   availability: "",
   status: "",
-  dispositions: "",
+  dispositions: [
+    {id: 1, value: "Good with other animals", isChecked: false},
+    {id: 2, value: "Good with children", isChecked: false},
+    {id: 3, value: "Animal must be leashed at all times", isChecked: false}
+  ],
   description: "",
-  admin: "",
+  admin: localStorage.getItem("token"),
 };
 
 const types = ["dog", "cat", "other"];
@@ -65,8 +70,26 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    let finalDispositions = [];
+    let dispositions = formData.dispositions;
+    dispositions.forEach(disposition => {
+      if(disposition.isChecked) {
+        finalDispositions.push(disposition.value);
+      }
+    })
+    setFormData({ ...formData, dispositions: finalDispositions });
     createPetProfile(formData, history);
   };
+
+  const handleCheckElement = (event) => {
+    let dispositions = formData.dispositions;
+    dispositions.forEach(disposition => {
+      if(disposition.value === event.target.value) {
+        disposition.isChecked = event.target.checked;
+      }
+    })
+    setFormData({...formData, dispositions: dispositions});
+  }
 
   return (
     <Fragment>
@@ -213,7 +236,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             />
           </Col>
         </Form.Group>
-
+{/* 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
             Despositions
@@ -234,6 +257,17 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               label="Animal must be leashed at all times"
               name="despositions"
             />
+          </Col>
+        </Form.Group> */}
+
+        <Form.Group as={Row}>
+          <Form.Label column sm={2}>
+            Despositions
+          </Form.Label>
+          <Col sm={10}>
+              {formData.dispositions.map((disposition, id) => {
+                return (<CheckBox key={id} handleCheckElement={handleCheckElement} {...disposition} />)
+              })}
           </Col>
         </Form.Group>
 
