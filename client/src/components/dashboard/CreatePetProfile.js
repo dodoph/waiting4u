@@ -64,12 +64,9 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     breed,
     availability,
     status,
-    dispositions,
     description,
     admin,
   } = formData;
-
-  const {dispositionOptions} = dispositionData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -159,7 +156,6 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               value={type}
               onChange={onChange}
             >
-              <option>-- Select Pet Type --</option>
               {types.map((type, index) => (
                 <option key={index}>{type}</option>
               ))}
