@@ -1,11 +1,9 @@
 import React, { Fragment, useState } from "react";
-import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { adminRegister } from "../../actions/auth";
 import PropTypes from "prop-types";
-import { applyMiddleware } from "redux";
 
 const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
   const [formData, setFormData] = useState({

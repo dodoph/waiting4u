@@ -9,7 +9,8 @@ import {
   USER_LOADED,
   ADMIN_LOADED,
   AUTH_ERROR,
-  CLEAR_PROFILE,
+  CLEAR_PET_PROFILE,
+  CLEAR_ADMINS_PET_PROFILES,
 } from "./types";
 import { URL_HOST } from "../constant";
 
@@ -116,7 +117,7 @@ export const register = ({ user_name, email, password, introduction }) => async 
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-  const body = JSON.stringify({ email, password });
+  // const body = JSON.stringify({ email, password });
 
   try {
     const res = await axios.post(`${URL_HOST}/users/login`, body, config);
@@ -157,6 +158,7 @@ export const loadUser = (user_id = null) => async (dispatch) => {
 
 // Logout/Clear profile
 export const logout = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_PET_PROFILE });
+  dispatch({ type: CLEAR_ADMINS_PET_PROFILES });
   dispatch({ type: LOGOUT });
 };
