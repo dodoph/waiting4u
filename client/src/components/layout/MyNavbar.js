@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const adminAuthLinks = (
@@ -21,7 +21,7 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <Nav className="ml-auto">
       <Nav.Link href="/aboutus">About us</Nav.Link>
-      <Nav.Link href="#!">Pets</Nav.Link>
+      <Nav.Link href="/pets">Pets</Nav.Link>
       <Nav.Link href="/register">Register</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
     </Nav>

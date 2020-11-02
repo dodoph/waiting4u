@@ -1,26 +1,27 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { Link } from "react-router-dom";
-import { getCurrentAdminProfile } from "../../actions/profile";
-import { Table, Button, Container, Row, Col } from "react-bootstrap";
+import { getAdminPetProfiles } from "../../actions/profile";
+import { Table, Container } from "react-bootstrap";
+import PetList from "./PetList";
 
 const ManagePets = ({
-  getCurrentProfile,
-  auth,
-  adminProfile: { adminProfile, loading },
+  getAdminPetProfiles,
+  petProfile: { adminsPetProfiles, loading },
 }) => {
-  // useEffect(() => {
-  //   getCurrentProfile();
-  // }, []);
+  useEffect(() => {
+    getAdminPetProfiles();
+  }, []);
 
-  return loading && adminProfile === null ? (
+  return loading && adminsPetProfiles === null ? (
     <Spinner />
   ) : (
     <Fragment>
-      <Container >
-        <h1 className="large mytext-primary mytext-center">Manage Pet Profiles</h1>
+      <Container>
+        <h1 className="large mytext-primary mytext-center">
+          Manage Pet Profiles
+        </h1>
       </Container>
       <Container>
         <Table striped bordered hover>
@@ -33,23 +34,9 @@ const ManagePets = ({
             </tr>
           </thead>
           <tbody>
-          <tr>
-              <td>Billy</td>
-              <td>Billy is a dog</td>
-              <td><Button>Edit</Button></td>
-              <td><Button>Delete</Button></td>
-            </tr>            <tr>
-              <td>Kitty</td>
-              <td>Kitty is a Cat</td>
-              <td><Button>Edit</Button></td>
-              <td><Button>Delete</Button></td>
-            </tr>
-            <tr>
-              <td>Mango</td>
-              <td>Mango is a turtle</td>
-              <td><Button>Edit</Button></td>
-              <td><Button>Delete</Button></td>
-            </tr>
+            {adminsPetProfiles.map((pet, index) => {
+              return <PetList key={index} {...pet} />;
+            })}
           </tbody>
         </Table>
       </Container>
@@ -58,14 +45,12 @@ const ManagePets = ({
 };
 
 ManagePets.propTypes = {
-  getCurrentAdminProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  adminProfile: PropTypes.object.isRequired,
+  getAdminPetProfiles: PropTypes.func.isRequired,
+  petProfile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  adminProfile: state.adminProfile,
+  petProfile: state.petProfile,
 });
 
-export default connect(mapStateToProps, { getCurrentAdminProfile })(ManagePets);
+export default connect(mapStateToProps, { getAdminPetProfiles })(ManagePets);

@@ -7,8 +7,7 @@ import {
   USER_LOADED,
   ADMIN_LOADED,
   AUTH_ERROR,
-  GET_PROFILE, 
-  PROFILE_ERROR
+  GET_PROFILE 
 } from "../actions/types";
 
 const initialState = {
