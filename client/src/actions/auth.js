@@ -9,7 +9,8 @@ import {
   USER_LOADED,
   ADMIN_LOADED,
   AUTH_ERROR,
-  CLEAR_PROFILE,
+  CLEAR_PET_PROFILE,
+  CLEAR_ADMINS_PET_PROFILES,
 } from "./types";
 import { URL_HOST } from "../constant";
 
@@ -162,6 +163,7 @@ export const loadUser = (user_id) => async (dispatch) => {
 
 // Logout/Clear profile
 export const logout = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_PET_PROFILE });
+  dispatch({ type: CLEAR_ADMINS_PET_PROFILES });
   dispatch({ type: LOGOUT });
 };

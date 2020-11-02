@@ -16,7 +16,6 @@ const initialState = {
   status: "",
   dispositions: [],
   description: "",
-  admin: localStorage.getItem("token"),
 };
 
 const initialDispositions = {
@@ -65,7 +64,6 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
     availability,
     status,
     description,
-    admin,
   } = formData;
 
   const onChange = (e) => {
@@ -270,20 +268,6 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
             </Col>
           </Form.Group>
         </fieldset>
-
-        <Form.Group as={Row}>
-          <Form.Label column sm={2}>
-            Admin
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control
-              type="text"
-              name="admin"
-              value={admin}
-              disabled
-            />
-          </Col>
-        </Form.Group>
 
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
