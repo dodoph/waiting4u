@@ -93,25 +93,21 @@ export const loadAdmin = (admin_id = null) => async (dispatch) => {
 };
 
 // Register User
-export const register = ({ username, email, password }) => async (dispatch) => {
-  // const body = JSON.stringify({ username, email, password });
+export const register = ({ user_name, email, password, introduction }) => async (dispatch) => {
+  const body = JSON.stringify({ user_name, email, password, introduction });
 
   try {
-    // const res = await axios.post('/api/users', body, config);
-    const placeholder = { token: "token-placeholder" };
-    const res = { data: placeholder };
+    const res = await axios.post(`${URL_HOST}/users`, body, config);
+    //const placeholder = { token: "token-placeholder" };
+    //const res = { data: placeholder };
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.user_id },
     });
 
-    dispatch(loadUser());
+    //dispatch(loadUser());
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: REGISTER_FAIL,
@@ -124,21 +120,16 @@ export const login = (email, password) => async (dispatch) => {
   // const body = JSON.stringify({ email, password });
 
   try {
-    // const res = await axios.post('/api/login', body, config);
-    const placeholder = { token: "token-placeholder" };
-    const res = { data: placeholder };
+    const res = await axios.post(`${URL_HOST}/users/login`, body, config);
+    console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.user_id },
     });
 
-    dispatch(loadUser());
+    dispatch(loadUser(res.data.user_id));
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.response.data.Error, "danger"));
 
     dispatch({
       type: LOGIN_FAIL,
@@ -146,14 +137,18 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+
 // Load User
-export const loadUser = (user_id) => async (dispatch) => {
+export const loadUser = (user_id = null) => async (dispatch) => {
   try {
-    const res = await axios.get(`${URL_HOST}/admins/${user_id}`, getConfig);
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
+    if (user_id) {
+      const res = await axios.get(`${URL_HOST}/users/${user_id}`, getConfig);
+      console.log(res);
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,

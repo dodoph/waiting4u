@@ -7,39 +7,47 @@ import PropTypes from "prop-types";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    username: "",
+    user_name: "",
     email: "",
     password: "",
     password2: "",
+    introduction: "",
   });
 
-  const { username, email, password, password2 } = formData;
+  const { user_name, email, password, password2, introduction } = formData;
+  console.log({ user_name, email, password, password2, introduction });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    // Validate user_name patten
+    var user_name_requirements = /^[A-Za-z][0-9a-zA-Z]+$/;
     // Validate password patten
     var password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-    if (!password.match(password_requirements)) {
+    if (!user_name.match(user_name_requirements)) {
+      setAlert("Invalid username.", "danger");
+      console.log("Invalid username.");
+    }
+    else if (!password.match(password_requirements)) {
       setAlert("Invalid Password.", "danger");
       console.log("Invalid Password.");
     }
-    if (password)
+    else if (password)
       if (password !== password2) {
         setAlert("Passwords don't match", "danger");
         console.log("Password doesn't match");
       } else {
-        register({ username, email, password });
+        register({ user_name, email, password, introduction });
         console.log("SUCCESS!");
       }
   };
 
   // Redirect if is authenticated
-  //   if (isAuthenticated) {
-  //     return <Redirect to="/dashboard" />;
-  //   }
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Fragment>
@@ -52,8 +60,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <input
             type="text"
             placeholder="Username"
-            name="username"
-            value={username}
+            name="user_name"
+            value={user_name}
             onChange={onChange}
             required
           />
@@ -92,6 +100,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             required
           />
         </div>
+        <div className="form-group">
+          <input
+              type="text"
+              placeholder="Introduction about yourself"
+              name="introduction"
+              value={introduction}
+              onChange={onChange}
+          />
+        </div>
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
@@ -111,4 +128,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register: register })(Register);

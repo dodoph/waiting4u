@@ -6,6 +6,8 @@ import Routes from "./components/routing/Routes";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import { loadAdmin } from "../src/actions/auth";
+import { UserEditProfile } from "./components/dashboard/UserEditProfile";
+import { loadUser } from "../src/actions/auth";
 
 // Redux
 import { Provider } from "react-redux";
@@ -18,6 +20,10 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadAdmin(localStorage.getItem("token")));
+  }, []);
+
+  useEffect(() => {
+    store.dispatch(loadUser(localStorage.getItem("token")));
   }, []);
 
   return (
