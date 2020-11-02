@@ -10,6 +10,7 @@ import ManagePets from "../../components/dashboard/ManagePets";
 import PrivateRoute from "../../components/routing/PrivateRoute";
 import AdminLogin from "../../components/auth/AdminLogin";
 import NotFound from "../../components/layout/NotFound";
+import Pets from "../../components/layout/Pets";
 import { AdminEditProfile } from "../../components/dashboard/AdminEditProfile";
 import { Route, Switch } from "react-router-dom";
 
@@ -19,12 +20,13 @@ const Routes = () => {
       <Alert />
       <Switch>
         <Route exact path="/aboutus" component={AboutUs} />
+        <Route exact path="/pets" component={Pets} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/adminregister" component={AdminRegister} />
         <Route exact path="/adminlogin" component={AdminLogin} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/admineditprofile" component={AdminEditProfile} />
-        {/* <Route  */}
+
         <PrivateRoute
           exact
           path="/create-pet-profile"

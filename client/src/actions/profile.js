@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { URL_HOST } from "../constant";
 
-import { GET_PROFILE, PROFILE_ERROR, GET_PET_PROFILE, GET_ADMINS_PET_PROFILES } from "./types";
+import { GET_PROFILE, PROFILE_ERROR, GET_PET_PROFILE, GET_ADMINS_PET_PROFILES, GET_ALL_PET_PROFILES } from "./types";
 
 // Global config settings
 const postConfig = {
@@ -41,7 +41,6 @@ export const getCurrentAdminProfile = () => async (dispatch) => {
 export const getAdminPetProfiles = () => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    debugger;
     if (admin_id) {
       const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets`, getConfig);
       console.log(res);
@@ -73,3 +72,20 @@ export const createPetProfile = (formData, history) => async dispatch => {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
 }
+
+// Get all pet profiles
+export const getAllPetProfiles = () => async (dispatch) => {
+  try {
+      const res = await axios.get(`${URL_HOST}/pets`, getConfig);
+      console.log(res);
+      dispatch({
+        type: GET_ALL_PET_PROFILES,
+        payload: res.data,
+      });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

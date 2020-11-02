@@ -1,6 +1,7 @@
 import {
   GET_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
+  GET_ALL_PET_PROFILES,
   CLEAR_PET_PROFILE,
   CLEAR_ADMINS_PET_PROFILES,
   PROFILE_ERROR,
@@ -9,6 +10,7 @@ import {
 const initialState = {
   petProfile: null,
   adminsPetProfiles: null,
+  allPetProfiles: null,
   loading: true,
   error: null,
 };
@@ -27,6 +29,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         adminsPetProfiles: payload,
+        loading: false,
+      };
+    case GET_ALL_PET_PROFILES:
+      return {
+        ...state,
+        allPetProfiles: payload,
         loading: false,
       };
     case CLEAR_PET_PROFILE:

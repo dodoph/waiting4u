@@ -21,7 +21,7 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <Nav className="ml-auto">
       <Nav.Link href="/aboutus">About us</Nav.Link>
-      <Nav.Link href="#!">Pets</Nav.Link>
+      <Nav.Link href="/pets">Pets</Nav.Link>
       <Nav.Link href="/register">Register</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
     </Nav>

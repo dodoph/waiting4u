@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MyNavbar from "./components/layout/MyNavbar";
 import Landing from "./components/layout/Landing";
 import Routes from "./components/routing/Routes";
@@ -25,8 +25,10 @@ const App = () => {
       <Router>
         <Fragment>
           <MyNavbar />
-          <Route exact path="/" component={Landing} />
-          <Routes />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Routes />
+          </Switch>
         </Fragment>
       </Router>
     </Provider>
