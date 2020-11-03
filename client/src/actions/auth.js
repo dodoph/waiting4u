@@ -39,10 +39,10 @@ export const adminRegister = ({ admin_name, email, password }) => async (
     console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: { token: res.data.admin_id },
+      payload: { token: res.data.admin_id, role: "admin" },
     });
 
-    // dispatch(loadAdmin(user_id));
+    dispatch(loadAdmin(res.data.admin_id));
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
 
@@ -61,7 +61,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { token: res.data.admin_id },
+      payload: { token: res.data.admin_id, role: "admin" },
     });
 
     dispatch(loadAdmin(res.data.admin_id));
@@ -100,7 +100,7 @@ export const register = ({ user_name, email, password, introduction }) => async 
     const res = await axios.post(`${URL_HOST}/users`, body, config);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: { token: res.data.user_id },
+      payload: { token: res.data.user_id, role: "user" },
     });
 
     dispatch(loadUser(res.data.user_id));
@@ -121,7 +121,7 @@ export const login = (email, password) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { token: res.data.user_id },
+      payload: { token: res.data.user_id, role: "user" },
     });
 
     dispatch(loadUser(res.data.user_id));

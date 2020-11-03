@@ -19,11 +19,12 @@ if (localStorage.token) {
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadAdmin(localStorage.getItem("token")));
-  }, []);
-
-  useEffect(() => {
-    store.dispatch(loadUser(localStorage.getItem("token")));
+    let role = localStorage.getItem("role");
+    let user_id = localStorage.getItem("token");
+    if ( role === "user")
+      store.dispatch(loadUser(user_id));
+    if ( role === "admin")
+      store.dispatch(loadAdmin(user_id));
   }, []);
 
   return (
