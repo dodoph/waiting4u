@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
@@ -15,7 +15,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   });
 
   const { user_name, email, password, password2, introduction } = formData;
-  console.log({ user_name, email, password, password2, introduction });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
