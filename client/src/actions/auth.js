@@ -98,14 +98,12 @@ export const register = ({ user_name, email, password, introduction }) => async 
 
   try {
     const res = await axios.post(`${URL_HOST}/users`, body, config);
-    //const placeholder = { token: "token-placeholder" };
-    //const res = { data: placeholder };
     dispatch({
       type: REGISTER_SUCCESS,
       payload: { token: res.data.user_id },
     });
 
-    //dispatch(loadUser());
+    dispatch(loadUser(res.data.user_id));
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
 
@@ -117,8 +115,7 @@ export const register = ({ user_name, email, password, introduction }) => async 
 
 // Login User
 export const login = (email, password) => async (dispatch) => {
-  // const body = JSON.stringify({ email, password });
-
+  const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post(`${URL_HOST}/users/login`, body, config);
     console.log(res);

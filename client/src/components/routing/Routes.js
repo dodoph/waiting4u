@@ -5,6 +5,7 @@ import AdminRegister from "../../components/auth/AdminRegister";
 import Login from "../../components/auth/Login";
 import Alert from "../../components/layout/Alert";
 import AdminDashboard from "../../components/dashboard/AdminDashboard";
+import UserDashboard from "../../components/dashboard/UserDashboard";
 import CreatePetProfile from "../../components/dashboard/CreatePetProfile";
 import ManagePets from "../../components/dashboard/ManagePets";
 import PrivateRoute from "../../components/routing/PrivateRoute";
@@ -34,6 +35,7 @@ const Routes = () => {
         />
         <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />
         <PrivateRoute exact path="/managepets" component={ManagePets} />
+        <PrivateRoute exact path="/dashboard" component={UserDashboard} />
         <Route component={NotFound} />
       </Switch>
     </section>
