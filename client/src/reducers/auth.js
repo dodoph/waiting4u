@@ -7,12 +7,13 @@ import {
   USER_LOADED,
   ADMIN_LOADED,
   AUTH_ERROR,
-  GET_PROFILE 
+  GET_PROFILE,
 } from "../actions/types";
 
 const initialState = {
   // TODO: token will be saved as a JWT token, so now it is a user id
   token: localStorage.getItem("token"),
+  role: localStorage.getItem("role"),
   isAuthenticated: null,
   loading: true,
   user: null,
@@ -34,6 +35,7 @@ export default function (state = initialState, action) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
+      localStorage.setItem("role", payload.role);
       return {
         ...state,
         ...payload,
@@ -45,6 +47,7 @@ export default function (state = initialState, action) {
     case LOGOUT:
     case AUTH_ERROR:
       localStorage.removeItem("token");
+      localStorage.removeItem("role");
       return {
         ...state,
         token: null,

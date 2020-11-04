@@ -13,7 +13,7 @@ export const PetCard = (props) => {
       )}
       <Card.Body>
         <Card.Text>{props.description}</Card.Text>
-        <Card.Text>{new Date(props.date_of_birth).toLocaleDateString("en-US")}</Card.Text>
+        <Card.Text>Date of Birth: {new Date(props.date_of_birth).toLocaleDateString("en-US")}</Card.Text>
         <Card.Text>{props.availability}</Card.Text>
       </Card.Body>
       <Button>More Info</Button>

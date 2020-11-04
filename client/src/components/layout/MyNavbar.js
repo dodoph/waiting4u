@@ -5,12 +5,26 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+export const MyNavbar = ({ auth: { role, isAuthenticated, loading, user }, logout }) => {
   const adminAuthLinks = (
     <Nav className="ml-auto">
       <NavDropdown title="Hi, Admin " id="basic-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
+        <NavDropdown.Item href="/pets">All Pets</NavDropdown.Item>
+      </NavDropdown>
+      <Nav.Link onClick={logout} href="#">
+        <i className="fas fa-sign-out-alt"></i> Logout
+      </Nav.Link>
+    </Nav>
+  );
+
+  const userAuthLinks = (
+    <Nav className="ml-auto">
+      <NavDropdown title="Hi, User" id="basic-nav-dropdown">
+        <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+        <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
+        <NavDropdown.Item href="/pets">All Pets</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
         <i className="fas fa-sign-out-alt"></i> Logout
@@ -36,7 +50,7 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </h2>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {isAuthenticated ? adminAuthLinks : guestLinks}
+          {isAuthenticated ? (role === "admin" ? adminAuthLinks : userAuthLinks) : guestLinks}
         </Navbar.Collapse>
     </Navbar>
   );

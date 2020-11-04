@@ -14,6 +14,7 @@ import NotFound from "../../components/layout/NotFound";
 import Pets from "../../components/layout/Pets";
 import { AdminEditProfile } from "../../components/dashboard/AdminEditProfile";
 import { Route, Switch } from "react-router-dom";
+import EditPetProfile from "../dashboard/EditPetProfile";
 
 const Routes = () => {
   return (
@@ -33,6 +34,7 @@ const Routes = () => {
           path="/create-pet-profile"
           component={CreatePetProfile}
         />
+        <PrivateRoute exact path="/edit-pet-profile/:id" component={EditPetProfile} />
         <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />
         <PrivateRoute exact path="/managepets" component={ManagePets} />
         <PrivateRoute exact path="/dashboard" component={UserDashboard} />

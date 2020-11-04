@@ -2,17 +2,31 @@ import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getAdminPetProfiles } from "../../actions/profile";
-import { Table, Container } from "react-bootstrap";
-import PetList from "./PetList";
+import { getAdminPetProfiles, deletePetProfile } from "../../actions/profile";
+import { Table, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ManagePets = ({
   getAdminPetProfiles,
+  deletePetProfile,
   petProfile: { adminsPetProfiles, loading },
 }) => {
   useEffect(() => {
     getAdminPetProfiles();
   }, []);
+
+  const pets = adminsPetProfiles ? (adminsPetProfiles.map((pet) => (
+    <tr key={pet.pet_id}>
+      <td>{pet.pet_name}</td>
+      <td>{pet.description}</td>
+      <td>
+      <Link to={`/edit-pet-profile/${pet.pet_id}`}><Button>Edit</Button></Link>
+      </td>
+      <td>
+        <Button onClick={() => deletePetProfile(pet.pet_id)}>Delete</Button>
+      </td>
+    </tr>
+  ))) : null;
 
   return loading && adminsPetProfiles === null ? (
     <Spinner />
@@ -34,9 +48,7 @@ const ManagePets = ({
             </tr>
           </thead>
           <tbody>
-            {adminsPetProfiles.map((pet, index) => {
-              return <PetList key={index} {...pet} />;
-            })}
+            {pets}
           </tbody>
         </Table>
       </Container>
@@ -46,6 +58,7 @@ const ManagePets = ({
 
 ManagePets.propTypes = {
   getAdminPetProfiles: PropTypes.func.isRequired,
+  deletePetProfile: PropTypes.func.isRequired,
   petProfile: PropTypes.object.isRequired,
 };
 
@@ -53,4 +66,7 @@ const mapStateToProps = (state) => ({
   petProfile: state.petProfile,
 });
 
-export default connect(mapStateToProps, { getAdminPetProfiles })(ManagePets);
+export default connect(mapStateToProps, {
+  getAdminPetProfiles,
+  deletePetProfile,
+})(ManagePets);
