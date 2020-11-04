@@ -111,7 +111,7 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
 export const getPetProfile = (pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.get(`${URL_HOST}/admin/${admin_id}/${pet_id}`, getConfig );
+    const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, getConfig );
     console.log(res);
     dispatch({
       type: GET_PET_PROFILE,

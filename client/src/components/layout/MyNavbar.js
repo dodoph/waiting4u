@@ -11,6 +11,7 @@ export const MyNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <NavDropdown title="Hi, Admin " id="basic-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
+        <NavDropdown.Item href="/pets">All Pets</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
         <i className="fas fa-sign-out-alt"></i> Logout
