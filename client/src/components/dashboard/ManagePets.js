@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getAdminPetProfiles, deletePetProfile, getPetProfile } from "../../actions/profile";
+import { getAdminPetProfiles, deletePetProfile } from "../../actions/profile";
 import { Table, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
