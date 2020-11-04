@@ -2,7 +2,14 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import { URL_HOST } from "../constant";
 
-import { GET_PROFILE, PROFILE_ERROR, GET_PET_PROFILE, DELETE_PET_PROFILE, GET_ADMINS_PET_PROFILES, GET_ALL_PET_PROFILES } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  GET_PET_PROFILE,
+  DELETE_PET_PROFILE,
+  GET_ADMINS_PET_PROFILES,
+  GET_ALL_PET_PROFILES,
+} from "./types";
 
 // Global config settings
 const postConfig = {
@@ -10,13 +17,13 @@ const postConfig = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
-}
+};
 
 const getConfig = {
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
-}
+};
 
 // Get user profile
 export const getCurrentUserProfile = () => async (dispatch) => {
@@ -62,7 +69,10 @@ export const getAdminPetProfiles = () => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
     if (admin_id) {
-      const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets`, getConfig);
+      const res = await axios.get(
+        `${URL_HOST}/admins/${admin_id}/pets`,
+        getConfig
+      );
       console.log(res);
       dispatch({
         type: GET_ADMINS_PET_PROFILES,
@@ -78,49 +88,35 @@ export const getAdminPetProfiles = () => async (dispatch) => {
 };
 
 // Create a pet profile
-export const createPetProfile = (formData, history) => async dispatch => {
+export const createPetProfile = (formData, history) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.post(`${URL_HOST}/admins/${admin_id}/pets`,formData, postConfig);
+    const res = await axios.post(
+      `${URL_HOST}/admins/${admin_id}/pets`,
+      formData,
+      postConfig
+    );
     dispatch({
       type: GET_PET_PROFILE,
       payload: res.data,
     });
     dispatch(setAlert("Pet Profile Created", "success"));
     history.push("/admindashboard");
-  } catch(err) {
+  } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
-}
+};
 
-// Delete a pet profile
-export const deletePetProfile = (pet_id) => async dispatch => {
+// Get a pet profile
+export const getPetProfile = (pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    await axios.delete(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`);
-    console.log("deleted a pet profile");
-    // update reducer
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets`, getConfig);
-      console.log(res);
-      dispatch({
-        type: GET_ADMINS_PET_PROFILES,
-        payload: res.data,
-      });
-    dispatch(setAlert("Pet Profile Deleted", "success"));
-  } catch(err) {
-    dispatch(setAlert(err.response.data.Error, "danger"));
-  }
-}
-
-// Get all pet profiles
-export const getAllPetProfiles = () => async (dispatch) => {
-  try {
-      const res = await axios.get(`${URL_HOST}/pets`, getConfig);
-      console.log(res);
-      dispatch({
-        type: GET_ALL_PET_PROFILES,
-        payload: res.data,
-      });
+    const res = await axios.get(`${URL_HOST}/admin/${admin_id}/${pet_id}`, getConfig );
+    console.log(res);
+    dispatch({
+      type: GET_PET_PROFILE,
+      payload: res.data,
+    });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -129,6 +125,41 @@ export const getAllPetProfiles = () => async (dispatch) => {
   }
 };
 
+// Delete a pet profile
+export const deletePetProfile = (pet_id) => async (dispatch) => {
+  try {
+    const admin_id = localStorage.getItem("token");
+    await axios.delete(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`);
+    console.log("deleted a pet profile");
+    // update reducer
+    const res = await axios.get(
+      `${URL_HOST}/admins/${admin_id}/pets`,
+      getConfig
+    );
+    console.log(res);
+    dispatch({
+      type: GET_ADMINS_PET_PROFILES,
+      payload: res.data,
+    });
+    dispatch(setAlert("Pet Profile Deleted", "success"));
+  } catch (err) {
+    dispatch(setAlert(err.response.data.Error, "danger"));
+  }
+};
 
-
-
+// Get all pet profiles
+export const getAllPetProfiles = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets`, getConfig);
+    console.log(res);
+    dispatch({
+      type: GET_ALL_PET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

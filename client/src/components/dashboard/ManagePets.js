@@ -1,10 +1,10 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getAdminPetProfiles, deletePetProfile } from "../../actions/profile";
+import { getAdminPetProfiles, deletePetProfile, getPetProfile } from "../../actions/profile";
 import { Table, Container, Button } from "react-bootstrap";
-import PetList from "./PetList";
+import { Link } from "react-router-dom";
 
 const ManagePets = ({
   getAdminPetProfiles,
@@ -15,22 +15,12 @@ const ManagePets = ({
     getAdminPetProfiles();
   }, []);
 
-  // const [petData, setPetData] = useState(adminsPetProfiles);
-
-  // function handleRemove(pet_id) {
-  //   adminsPetProfiles = adminsPetProfiles.filter((pet) => pet.pet_id != pet_id);
-  //   this.setState();
-  //   deletePetProfile(pet_id);
-
-  //   console.log(`delete, ${pet_id}`);
-  // }
-
   const pets = adminsPetProfiles ? (adminsPetProfiles.map((pet) => (
     <tr key={pet.pet_id}>
       <td>{pet.pet_name}</td>
       <td>{pet.description}</td>
       <td>
-        <Button>Edit</Button>
+      <Link to={`/edit-pet-profile/${pet.pet_id}`}><Button>Edit</Button></Link>
       </td>
       <td>
         <Button onClick={() => deletePetProfile(pet.pet_id)}>Delete</Button>
@@ -58,20 +48,6 @@ const ManagePets = ({
             </tr>
           </thead>
           <tbody>
-            {/* {adminsPetProfiles.map((pet) => (
-              <tr key={pet.pet_id}>
-                <td>{pet.pet_name}</td>
-                <td>{pet.description}</td>
-                <td>
-                  <Button>Edit</Button>
-                </td>
-                <td>
-                  <Button onClick={() => handleRemove(pet.pet_id)}>
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))} */}
             {pets}
           </tbody>
         </Table>
