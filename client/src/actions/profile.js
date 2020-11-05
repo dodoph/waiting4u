@@ -107,11 +107,28 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-// Get a pet profile
+// Get a pet profile (admin view)
 export const getPetProfile = (pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
     const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, getConfig );
+    console.log(res);
+    dispatch({
+      type: GET_PET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get a pet profile (public view)
+export const getPetProfileViewOnly = (pet_id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets/${pet_id}`, getConfig );
     console.log(res);
     dispatch({
       type: GET_PET_PROFILE,

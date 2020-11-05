@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import img_placeholder from "../../img/dog-solid.svg";
+import { Link } from "react-router-dom";
 
 export const PetCard = (props) => {
   return (
@@ -16,7 +17,7 @@ export const PetCard = (props) => {
         <Card.Text>Date of Birth: {new Date(props.date_of_birth).toISOString().split("T")[0]}</Card.Text>
         <Card.Text>{props.availability}</Card.Text>
       </Card.Body>
-      <Button>More Info</Button>
+      <Link to={`/pets/${props.pet_id}`}><Button>More Info</Button></Link>
     </Card>
   );
 };
