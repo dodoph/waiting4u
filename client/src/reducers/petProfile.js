@@ -1,5 +1,6 @@
 import {
   GET_PET_PROFILE,
+  UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
   CLEAR_PET_PROFILE,
@@ -20,6 +21,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_PET_PROFILE:
+    case UPDATE_PET_PROFILE:
       return {
         ...state,
         petProfile: payload,
