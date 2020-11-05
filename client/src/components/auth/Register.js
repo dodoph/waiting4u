@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
+import {Form} from "react-bootstrap";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -100,14 +101,17 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <div className="form-group">
-          <input
-              type="text"
-              placeholder="Introduction about yourself"
+          <Form.Control
+              type="Introduction"
+              placeholder="Introduction about yourself (optional)"
+              as="textarea"
+              rows={5}
               name="introduction"
               value={introduction}
               onChange={onChange}
           />
         </div>
+
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">

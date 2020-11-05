@@ -2,17 +2,14 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { Link } from "react-router-dom";
-import { getCurrentUserProfile } from "../../actions/profile";
-import { loadUser } from "../../actions/auth";
+import {loadUser} from "../../actions/auth";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 const UserDashboard = ({
-  getCurrentUserProfile,
-  auth: { user, isAuthenticated, loading },
+  auth: { user, loading },
 }) => {
   useEffect(() => {
-    getCurrentUserProfile();
+      loadUser(localStorage.getItem("token"));
   }, []);
 
   return loading && user === null ? (
@@ -34,14 +31,11 @@ const UserDashboard = ({
 };
 
 UserDashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  userProfile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  userProfile: state.userProfile,
 });
 
-export default connect(mapStateToProps, { getCurrentUserProfile })(UserDashboard);
+export default connect(mapStateToProps, {})(UserDashboard);

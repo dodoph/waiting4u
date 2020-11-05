@@ -6,7 +6,6 @@ import Routes from "./components/routing/Routes";
 import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import { loadAdmin } from "../src/actions/auth";
-import { UserEditProfile } from "./components/dashboard/UserEditProfile";
 import { loadUser } from "../src/actions/auth";
 
 // Redux

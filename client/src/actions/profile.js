@@ -162,3 +162,84 @@ export const getAllPetProfiles = () => async (dispatch) => {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const updateUserProfile = (formData, history) => async (dispatch) => {
+  try {
+    const user_id = localStorage.getItem("token");
+    const res = await axios.patch(
+        `${URL_HOST}/users/${user_id}`,
+        formData,
+        postConfig
+    );
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+    dispatch(setAlert("User Profile Updated", "success"));
+    history.push("/dashboard");
+  } catch (err) {
+    dispatch(setAlert(err.response.data.Error, "danger"));
+  }
+};
