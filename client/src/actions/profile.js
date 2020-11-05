@@ -146,7 +146,7 @@ export const getPetProfileViewOnly = (pet_id) => async (dispatch) => {
 export const updatePetProfile = (formData, history, pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.patch(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, formData, postConfig );
+    const res = await axios.put(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, formData, postConfig );
     console.log(res);
     dispatch({
       type: UPDATE_PET_PROFILE,
