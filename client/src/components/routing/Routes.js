@@ -29,7 +29,7 @@ const Routes = () => {
         <Route exact path="/adminlogin" component={AdminLogin} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/admineditprofile" component={AdminEditProfile} />
-        <Route exact path="/usereditprofile" component={UserEditProfile} />
+        <PrivateRoute exact path="/usereditprofile" component={UserEditProfile} />
 
         <PrivateRoute
           exact

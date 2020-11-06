@@ -1,10 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import React, {Fragment, useState, useEffect} from "react";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {Form, Col, Row, Button} from "react-bootstrap";
 import PropTypes from "prop-types";
-import { setAlert } from "../../actions/alert";
-import { getCurrentUserProfile, updateUserProfile} from "../../actions/profile";
+import {setAlert} from "../../actions/alert";
+import {getCurrentUserProfile, updateUserProfile} from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
     introduction: "",
 };
 
-const UserEditProfile = ({ getCurrentUserProfile, updateUserProfile, history, auth: { user, loading }, }) => {
+const UserEditProfile = ({getCurrentUserProfile, updateUserProfile, history, auth: {user, loading},}) => {
     const [formData, setFormData] = useState(initialState);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const UserEditProfile = ({ getCurrentUserProfile, updateUserProfile, history, au
     } = formData;
 
     const onChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const onSubmit = (e) => {
@@ -43,17 +43,16 @@ const UserEditProfile = ({ getCurrentUserProfile, updateUserProfile, history, au
         if (existing_password !== user.password) {
             setAlert("Unauthorized operation: existing password does not match our record", "danger");
             console.log("Unauthorized operation.");
-        }else if (new_password && !new_password.match(password_requirements)) {
+        } else if (new_password && !new_password.match(password_requirements)) {
             setAlert("Invalid Password.", "danger");
             console.log("Invalid Password.");
-        }
-        else if (new_password && new_password !== new_password2) {
+        } else if (new_password && new_password !== new_password2) {
             setAlert(
                 "Passwords don't match or invalid verification code!",
                 "danger"
             );
             console.log("password doesn't match");
-        }else{
+        } else {
             updateUserProfile(formData, history);
             console.log("SUCCESS!");
         }
@@ -128,14 +127,14 @@ const UserEditProfile = ({ getCurrentUserProfile, updateUserProfile, history, au
                 </fieldset>
 
                 <Form.Group as={Row}>
-                    <Col sm={{ span: 10, offset: 2 }}>
+                    <Col sm={{span: 10, offset: 2}}>
                         <Button type="submit">Update Profile</Button>
                     </Col>
                 </Form.Group>
             </Form>
         </Fragment>
     ) : (
-        <Spinner />
+        <Spinner/>
     );
 };
 
@@ -150,6 +149,6 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, { setAlert, getCurrentUserProfile, updateUserProfile })(
+export default connect(mapStateToProps, {setAlert, getCurrentUserProfile, updateUserProfile})(
     withRouter(UserEditProfile)
 );

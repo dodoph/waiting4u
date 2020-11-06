@@ -164,67 +164,7 @@ export const getAllPetProfiles = () => async (dispatch) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//user update profile
 export const updateUserProfile = (formData, history) => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
