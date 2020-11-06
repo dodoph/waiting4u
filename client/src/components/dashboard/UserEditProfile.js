@@ -4,21 +4,33 @@ import { connect } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { setAlert } from "../../actions/alert";
-import { updateUserProfile} from "../../actions/profile";
+import { getCurrentUserProfile, updateUserProfile} from "../../actions/profile";
+import Spinner from "../layout/Spinner";
 
 const initialState = {
+    existing_password: "",
     new_password: "",
     new_password2: "",
-    new_introduction: "",
+    introduction: "",
 };
 
-export const UserEditProfile = ({ updateUserProfile, history }) => {
+const UserEditProfile = ({ getCurrentUserProfile, updateUserProfile, history, auth: { user, loading }, }) => {
     const [formData, setFormData] = useState(initialState);
 
+    useEffect(() => {
+        if (!user) {
+            getCurrentUserProfile();
+        }
+        if (!loading && user) {
+            setFormData(user);
+        }
+    }, [loading, getCurrentUserProfile, user]);
+
     const {
+        existing_password,
         new_password,
         new_password2,
-        new_introduction,
+        introduction,
     } = formData;
 
     const onChange = (e) => {
@@ -27,8 +39,11 @@ export const UserEditProfile = ({ updateUserProfile, history }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        var password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-        if (new_password && !new_password.match(password_requirements)) {
+        let password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+        if (existing_password !== user.password) {
+            setAlert("Unauthorized operation: existing password does not match our record", "danger");
+            console.log("Unauthorized operation.");
+        }else if (new_password && !new_password.match(password_requirements)) {
             setAlert("Invalid Password.", "danger");
             console.log("Invalid Password.");
         }
@@ -44,10 +59,24 @@ export const UserEditProfile = ({ updateUserProfile, history }) => {
         }
     };
 
-    return (
+    return user ? (
         <Fragment>
             <Form onSubmit={onSubmit}>
                 <h3>Update Password</h3>
+                <Form.Group as={Row}>
+                    <Form.Label column sm={2}>
+                        Existing Password
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter Existing Password"
+                            name="existing_password"
+                            value={existing_password}
+                            onChange={onChange}
+                        />
+                    </Col>
+                </Form.Group>
                 <Form.Group as={Row}>
                     <Form.Label column sm={2}>
                         New Password
@@ -90,8 +119,8 @@ export const UserEditProfile = ({ updateUserProfile, history }) => {
                                 placeholder="New Introduction"
                                 as="textarea"
                                 rows={5}
-                                name="new_introduction"
-                                value={new_introduction}
+                                name="introduction"
+                                value={introduction}
                                 onChange={onChange}
                             />
                         </Col>
@@ -105,14 +134,22 @@ export const UserEditProfile = ({ updateUserProfile, history }) => {
                 </Form.Group>
             </Form>
         </Fragment>
+    ) : (
+        <Spinner />
     );
 };
 
 UserEditProfile.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+    getCurrentUserProfile: PropTypes.func.isRequired,
     updateUserProfile: PropTypes.func.isRequired,
-    //userProfile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
 };
 
-export default connect(null, { updateUserProfile })(
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
+
+export default connect(mapStateToProps, { setAlert, getCurrentUserProfile, updateUserProfile })(
     withRouter(UserEditProfile)
 );
