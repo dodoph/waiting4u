@@ -40,7 +40,7 @@ const UserEditProfile = ({getCurrentUserProfile, updateUserProfile, history, aut
     const onSubmit = (e) => {
         e.preventDefault();
         let password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-        if (existing_password !== user.password) {
+        if (new_password && existing_password !== user.password) {
             setAlert("Unauthorized operation: existing password does not match our record", "danger");
             console.log("Unauthorized operation.");
         } else if (new_password && !new_password.match(password_requirements)) {
