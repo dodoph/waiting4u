@@ -14,7 +14,7 @@ const initialState = {
     introduction: "",
 };
 
-const UserEditProfile = ({ setAlert, updateUserProfile, history, auth: {user, loading},}) => {
+const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, history, auth: {user, loading},}) => {
     const [formData, setFormData] = useState(initialState);
 
     useEffect(() => {
