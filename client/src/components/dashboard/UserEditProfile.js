@@ -3,8 +3,8 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Form, Col, Row, Button} from "react-bootstrap";
 import PropTypes from "prop-types";
-import {setAlert} from "../../actions/alert";
-import {getCurrentUserProfile, updateUserProfile} from "../../actions/profile";
+import { setAlert } from "../../actions/alert";
+import { getCurrentUserProfile, updateUserProfile } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
     introduction: "",
 };
 
-const UserEditProfile = ({getCurrentUserProfile, updateUserProfile, history, auth: {user, loading},}) => {
+const UserEditProfile = ({ setAlert, updateUserProfile, history, auth: {user, loading},}) => {
     const [formData, setFormData] = useState(initialState);
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const UserEditProfile = ({getCurrentUserProfile, updateUserProfile, history, aut
             console.log("Invalid Password.");
         } else if (new_password && new_password !== new_password2) {
             setAlert(
-                "Passwords don't match or invalid verification code!",
+                "Passwords don't match!",
                 "danger"
             );
             console.log("password doesn't match");
