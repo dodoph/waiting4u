@@ -12,7 +12,7 @@ import PrivateRoute from "../../components/routing/PrivateRoute";
 import AdminLogin from "../../components/auth/AdminLogin";
 import NotFound from "../../components/layout/NotFound";
 import Pets from "../../components/layout/Pets";
-import { AdminEditProfile } from "../../components/dashboard/AdminEditProfile";
+import AdminEditProfile from "../../components/dashboard/AdminEditProfile";
 import { Route, Switch } from "react-router-dom";
 import EditPetProfile from "../dashboard/EditPetProfile";
 import UserEditProfile from "../dashboard/UserEditProfile";
@@ -28,7 +28,7 @@ const Routes = () => {
         <Route exact path="/adminregister" component={AdminRegister} />
         <Route exact path="/adminlogin" component={AdminLogin} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/admineditprofile" component={AdminEditProfile} />
+        <PrivateRoute exact path="/admineditprofile" component={AdminEditProfile} />
         <PrivateRoute exact path="/usereditprofile" component={UserEditProfile} />
 
         <PrivateRoute
