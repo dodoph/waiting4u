@@ -1,35 +1,35 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import img_placeholder from "../../img/dog-solid.svg";
 import { Link } from "react-router-dom";
 
 export const PetCard = (props) => {
+  const pet_name =
+    props.pet_name.charAt(0).toUpperCase() + props.pet_name.slice(1);
+
   return (
-    <Card style={{ width: "18rem" }} key={props.index} className="box">
-      <Card.Title>{props.pet_name}</Card.Title>
+    <Card style={props.style} key={props.index} className="text-center">
       {props.image_url ? (
         <Card.Img variant="top" src={props.image_url} />
       ) : (
-        <Card.Img variant="top" src={img_placeholder} />
+        <i className="fas fa-dog fa-10x"></i>
       )}
       <Card.Body>
-        <Card.Text>{props.description}</Card.Text>
-        <Card.Text>Date of Birth: {new Date(props.date_of_birth).toISOString().split("T")[0]}</Card.Text>
-        <Card.Text>{props.availability}</Card.Text>
+        <Card.Title className="mytext-primary">{pet_name}</Card.Title>
+        <p>
+          {props.description}
+          <br />
+          Birthday: {new Date(props.date_of_birth).toISOString().split("T")[0]}
+          <br />
+          {props.availability}
+        </p>
+        <div>
+          <Link to={`/pets/${props.pet_id}`}>
+            <Button>More Info</Button>
+          </Link>
+        </div>
       </Card.Body>
-      <Link to={`/pets/${props.pet_id}`}><Button>More Info</Button></Link>
     </Card>
   );
 };
 
-// Carousel.propTypes = {
-//   logout: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-// };
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-// });
-
-// export default connect(mapStateToProps, { logout })(Carousel);
 export default PetCard;
