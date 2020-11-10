@@ -79,7 +79,7 @@ const EditPetProfile = ({
         });
       });
     }
-  }, [loading, getPetProfile, petProfile]);
+  }, [loading, getPetProfile, petProfile, params.id]);
 
   const {
     pet_name,

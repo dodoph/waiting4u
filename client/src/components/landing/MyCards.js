@@ -5,15 +5,21 @@ import { Col, CardColumns } from "react-bootstrap";
 import { getAllPetProfiles } from "../../actions/profile";
 import PetCard from "../../components/layout/PetCard";
 import Spinner from "../layout/Spinner";
+import NoPetFound from "./NoPetFound";
 
-const MyCards = ({ getAllPetProfiles, petProfile: { allPetProfiles } }) => {
+const MyCards = ({
+  getAllPetProfiles,
+  petProfile: { allPetProfiles, error },
+}) => {
   useEffect(() => {
     getAllPetProfiles();
   }, []);
 
   return (
     <Col xs={12} md={9} lg={9}>
-      {allPetProfiles ? (
+      {error ? (
+        <NoPetFound />
+      ) : allPetProfiles ? (
         <CardColumns>
           {allPetProfiles.map((pet, index) => {
             return (
