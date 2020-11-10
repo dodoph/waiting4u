@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
-import { getPetProfile } from "../../actions/profile";
+import { getPetProfile, updatePetProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 import CheckBox from "./CheckBox";
 import Spinner from "../layout/Spinner";
@@ -54,32 +54,43 @@ const otherBreeds = ["Other"];
 
 const EditPetProfile = ({
   getPetProfile,
+  updatePetProfile,
   history,
   match: { params },
-  petProfile: { petProfile },
+  petProfile: { petProfile, loading },
 }) => {
-  useEffect(() => {
-    getPetProfile(params.id);
-  }, []);
-
-  const [formData, setFormData] = useState(
-    petProfile ? petProfile : initialState
-  );
-
-  if (petProfile) {
-    let dispositions = petProfile.dispositions;
-    let dispositionOptions = initialDispositions.dispositionOptions;
-    dispositions.forEach((disposition) => {
-      dispositionOptions.forEach((dispositionOption) => {
-        if (disposition === dispositionOption.value) {
-          dispositionOption.isChecked = true;
-        }
-      });
-    });
-  }
+  const [formData, setFormData] = useState(initialState);
   const [dispositionData, setDispositionData] = useState(initialDispositions);
 
-  const { type } = formData;
+  useEffect(() => {
+    if (!petProfile) {
+      getPetProfile(params.id);
+    }
+    if (!loading && petProfile) {
+      petProfile.date_of_birth = new Date(petProfile.date_of_birth).toISOString().split("T")[0];
+      setFormData(petProfile);
+      let dispositions = petProfile.dispositions;
+      let dispositionOptions = initialDispositions.dispositionOptions;
+      dispositions.forEach((disposition) => {
+        dispositionOptions.forEach((dispositionOption) => {
+          if (disposition === dispositionOption.value) {
+            dispositionOption.isChecked = true;
+          }
+        });
+      });
+    }
+  }, [loading, getPetProfile, petProfile]);
+
+  const {
+    pet_name,
+    image_url,
+    date_of_birth,
+    type,
+    breed,
+    availability,
+    status,
+    description,
+  } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -96,7 +107,7 @@ const EditPetProfile = ({
     });
     const updatedFormData = { ...formData, dispositions: dispositions };
     setFormData(updatedFormData);
-    // createPetProfile(updatedFormData, history);
+    updatePetProfile(updatedFormData, history, params.id);
   };
 
   const handleCheckElement = (event) => {
@@ -122,7 +133,7 @@ const EditPetProfile = ({
               type="name"
               placeholder="Name"
               name="pet_name"
-              value={petProfile.pet_name}
+              value={pet_name}
               onChange={onChange}
             />
           </Col>
@@ -137,7 +148,7 @@ const EditPetProfile = ({
               type="text"
               placeholder="Image URL"
               name="image_url"
-              value={petProfile.image_url}
+              value={image_url}
               onChange={onChange}
             />
           </Col>
@@ -152,7 +163,7 @@ const EditPetProfile = ({
               type="date"
               placeholder="Date of Birth"
               name="date_of_birth"
-              value={new Date(petProfile.date_of_birth).toISOString().split('T')[0]}
+              value={date_of_birth}
               onChange={onChange}
             />
           </Col>
@@ -166,7 +177,7 @@ const EditPetProfile = ({
             <Form.Control
               as="select"
               name="type"
-              value={petProfile.type}
+              value={type}
               onChange={onChange}
             >
               {types.map((type, index) => (
@@ -185,7 +196,7 @@ const EditPetProfile = ({
               <Form.Control
                 as="select"
                 name="breed"
-                value={petProfile.breed}
+                value={breed}
                 onChange={onChange}
               >
                 {dogBreeds.map((breed, index) => (
@@ -197,7 +208,7 @@ const EditPetProfile = ({
               <Form.Control
                 as="select"
                 name="breed"
-                value={petProfile.breed}
+                value={breed}
                 onChange={onChange}
               >
                 {catBreeds.map((breed, index) => (
@@ -209,7 +220,7 @@ const EditPetProfile = ({
               <Form.Control
                 as="select"
                 name="breed"
-                value={petProfile.breed}
+                value={breed}
                 onChange={onChange}
               >
                 {otherBreeds.map((breed, index) => (
@@ -228,7 +239,7 @@ const EditPetProfile = ({
             <Form.Control
               as="select"
               name="availability"
-              value={petProfile.availability}
+              value={availability}
               onChange={onChange}
             >
               <option value="available">Available</option>
@@ -248,7 +259,7 @@ const EditPetProfile = ({
               type="text"
               placeholder="Status"
               name="status"
-              value={petProfile.status}
+              value={status}
               onChange={onChange}
             />
           </Col>
@@ -283,7 +294,7 @@ const EditPetProfile = ({
                 as="textarea"
                 rows={5}
                 name="description"
-                value={petProfile.description}
+                value={description}
                 onChange={onChange}
               />
             </Col>
@@ -304,6 +315,7 @@ const EditPetProfile = ({
 
 EditPetProfile.propTypes = {
   getPetProfile: PropTypes.func.isRequired,
+  updatePetProfile: PropTypes.func.isRequired,
   petProfile: PropTypes.object.isRequired,
 };
 
@@ -311,6 +323,6 @@ const mapStateToProps = (state) => ({
   petProfile: state.petProfile,
 });
 
-export default connect(mapStateToProps, { getPetProfile })(
+export default connect(mapStateToProps, { getPetProfile, updatePetProfile })(
   withRouter(EditPetProfile)
 );

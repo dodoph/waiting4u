@@ -6,6 +6,7 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   GET_PET_PROFILE,
+  UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
 } from "./types";
@@ -107,7 +108,7 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-// Get a pet profile
+// Get a pet profile (admin view)
 export const getPetProfile = (pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
@@ -117,6 +118,43 @@ export const getPetProfile = (pet_id) => async (dispatch) => {
       type: GET_PET_PROFILE,
       payload: res.data,
     });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get a pet profile (public view)
+export const getPetProfileViewOnly = (pet_id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets/${pet_id}`, getConfig );
+    console.log(res);
+    dispatch({
+      type: GET_PET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Update a pet profile
+export const updatePetProfile = (formData, history, pet_id) => async (dispatch) => {
+  try {
+    const admin_id = localStorage.getItem("token");
+    const res = await axios.put(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, formData, postConfig );
+    console.log(res);
+    dispatch({
+      type: UPDATE_PET_PROFILE,
+      payload: res.data,
+    });
+    dispatch(setAlert("Pet Profile Updated", "success"));
+    history.push("/managepets");
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
