@@ -11,10 +11,10 @@ export const MyNavbar = ({
 }) => {
   const adminAuthLinks = (
     <Nav className="ml-auto">
+      {/* <i className="fas fa-user-circle"></i> */}
       <NavDropdown title="Hi, Admin " id="basic-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
-        <NavDropdown.Item href="/pets">All Pets</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
         <i className="fas fa-sign-out-alt"></i> Logout
@@ -27,7 +27,6 @@ export const MyNavbar = ({
       <NavDropdown title="Hi, User" id="basic-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
-        <NavDropdown.Item href="/pets">All Pets</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
         <i className="fas fa-sign-out-alt"></i> Logout
@@ -37,8 +36,6 @@ export const MyNavbar = ({
 
   const guestLinks = (
     <Nav className="ml-auto">
-      <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/pets">Pets</Nav.Link>
       <Nav.Link href="/register">Register</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
       <Nav.Link href="/aboutus">About us</Nav.Link>
@@ -54,11 +51,15 @@ export const MyNavbar = ({
       </h2>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        {isAuthenticated
-          ? role === "admin"
-            ? adminAuthLinks
-            : userAuthLinks
-          : guestLinks}
+        <Nav className="ml-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/pets">Pets</Nav.Link>
+          {isAuthenticated
+            ? role === "admin"
+              ? adminAuthLinks
+              : userAuthLinks
+            : guestLinks}
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
