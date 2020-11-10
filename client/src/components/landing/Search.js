@@ -67,9 +67,9 @@ export const Search = ({
       }
     });
     const updatedFormData = { ...formData, dispositions: dispositions };
+    console.log(updatedFormData);
     setFormData(updatedFormData);
-    console.log(formData);
-    getAllPetsProfilesBySearch(formData);
+    getAllPetsProfilesBySearch(updatedFormData);
   };
 
   const handleCheckElement = (event) => {
