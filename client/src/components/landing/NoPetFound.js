@@ -5,7 +5,7 @@ export const NoPetFound = () => {
   return (
     <Container className="mytext-center">
       <div className="large">
-        <i class="fab fa-earlybirds"></i>
+        <i className="fab fa-earlybirds"></i>
       </div>
       <div>
         <p>Owlf!<br /> 

@@ -9,15 +9,16 @@ import NoPetFound from "./NoPetFound";
 
 const MyCards = ({
   getAllPetProfiles,
-  petProfile: { allPetProfiles, error },
+  petProfile: { allPetProfiles },
 }) => {
   useEffect(() => {
     getAllPetProfiles();
   }, []);
 
+  const noPetFound = allPetProfiles ? allPetProfiles.length === 0 : false;
   return (
     <Col xs={12} md={9} lg={9}>
-      {error ? (
+      {noPetFound ? (
         <NoPetFound />
       ) : allPetProfiles ? (
         <CardColumns>

@@ -225,10 +225,9 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
     }
     const res = await axios.get(`${URL_HOST}/pets?${params}`, getConfig);
     console.log(res);
-
     dispatch({
       type: GET_ALL_PET_PROFILES,
-      payload: res.data,
+      payload: res.data.length === 0 ? [] : res.data,
     });
   } catch (err) {
     dispatch({
