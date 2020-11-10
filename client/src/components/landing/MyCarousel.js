@@ -8,22 +8,14 @@ export const MyCarousel = () => {
   return (
     <Carousel>
       <Carousel.Item>
-        <img
-          className="myCarousel-item"
-          src={img1}
-          alt="First slide"
-        />
+        <img className="myCarousel-item" src={img1} alt="First slide" />
         <Carousel.Caption>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="myCarousel-item"
-          src={img2}
-          alt="Third slide"
-        />
+        <img className="myCarousel-item" src={img2} alt="Third slide" />
 
         <Carousel.Caption>
           <h3>Second slide label</h3>
@@ -31,29 +23,17 @@ export const MyCarousel = () => {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="myCarousel-item"
-          src={img3}
-          alt="Third slide"
-        />
+        <img className="myCarousel-item" src={img3} alt="Third slide" />
 
         <Carousel.Caption>
           <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
   );
 };
 
-// Carousel.propTypes = {
-//   logout: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-// };
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-// });
-
-// export default connect(mapStateToProps, { logout })(Carousel);
 export default MyCarousel;
