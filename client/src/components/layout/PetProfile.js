@@ -4,7 +4,6 @@ import Spinner from "../layout/Spinner";
 import { getPetProfileViewOnly } from "../../actions/profile";
 import { connect } from "react-redux";
 import { Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import img_placeholder from "../../img/dog-solid.svg";
 import { withRouter } from "react-router-dom";
 

@@ -8,9 +8,7 @@ export const Landing = () => {
   return (
     <Container>
       <Row>
-        <div className="myCarousel">
           <MyCarousel />
-        </div>
       </Row>
 
       <Container>

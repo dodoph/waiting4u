@@ -194,13 +194,49 @@ export const getAllPetProfiles = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response.Error, status: err.response.status },
     });
   }
 };
 
+// Get all pet profiles by search
+export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
+  try {
+    const { type, breed, dispositions } = formData;
+    if (type === "All" && breed === "All" && dispositions.length === 0) {
+      return getAllPetProfiles();
+    }
+
+    let params = "";
+    if (type !== "All") {
+      params = params + "type=" + type.toLowerCase();
+    }
+    if (breed !== "All") {
+      params = params + "&breed=" + breed.toLowerCase();
+    }
+    if (dispositions.length > 0) {
+      if (type === "All" && breed === "All") {
+        params = params + "dispositions=" + dispositions;
+      } else {
+        params = params + "&dispositions=" + dispositions;
+      }
+    }
+    const res = await axios.get(`${URL_HOST}/pets?${params}`, getConfig);
+    console.log(res);
+    dispatch({
+      type: GET_ALL_PET_PROFILES,
+      payload: res.data.length === 0 ? [] : res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
 
 //user update profile
 export const updateUserProfile = (formData, history) => async (dispatch) => {
