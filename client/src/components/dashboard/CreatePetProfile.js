@@ -12,7 +12,7 @@ const initialState = {
   date_of_birth: "",
   type: "dog",
   breed: "Retrievers",
-  availability: "available",
+  availability: "Available",
   status: "",
   dispositions: [],
   description: "",
@@ -216,10 +216,10 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               value={availability}
               onChange={onChange}
             >
-              <option value="available">Available</option>
-              <option value="pending">Pending</option>
-              <option value="not-available">Not Available</option>
-              <option value="adopted">Adopted</option>
+              <option value="Available">Available</option>
+              <option value="Pending">Pending</option>
+              <option value="Not-available">Not Available</option>
+              <option value="Adopted">Adopted</option>
             </Form.Control>
           </Col>
         </Form.Group>

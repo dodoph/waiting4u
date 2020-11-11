@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getAllPetProfiles } from "../../actions/profile";
-import { Container, CardDeck } from "react-bootstrap";
+import { Container, CardDeck, Jumbotron } from "react-bootstrap";
 import PetCard from "../layout/PetCard";
 
 const Pets = ({
@@ -18,11 +18,16 @@ const Pets = ({
     <Spinner />
   ) : (
     <Fragment>
-      <Container>
+      <Jumbotron>
         <h1 className="large mytext-primary mytext-center">View All Pets</h1>
-      </Container>
+        <p>
+          This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.
+        </p>
+      </Jumbotron>
 
-      <CardDeck className="d-flex justify-content-center">
+      {allPetProfiles.length > 0 ? (
+        <CardDeck className="d-flex justify-content-center">
         {allPetProfiles.map((pet, index) => {
           return (
             <div key={index} className="mb-4">
@@ -31,6 +36,10 @@ const Pets = ({
           );
         })}
       </CardDeck>
+      ) : (
+        <div>Sorry we do not have any available pets at this moment, please check back later.</div>
+      )}
+      
     </Fragment>
   );
 };
