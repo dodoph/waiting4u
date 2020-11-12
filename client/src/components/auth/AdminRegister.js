@@ -52,9 +52,9 @@ const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign Up</h1>
+      <h1 className="large mytext-primary">Sign Up</h1>
       <p className="lead">
-        <i className="fas fa-user" /> Create Your Admin Account{" "}
+        <i className="fas fa-user-plus" /> Create Your Admin Account{" "}
       </p>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
@@ -114,7 +114,7 @@ const AdminRegister = ({ setAlert, adminregister, isAuthenticated }) => {
         />
       </form>
       <p className="my-1">
-        Already have an account? <Link to="/login">Sign In</Link>
+        Already have an Admin account? <Link to="/adminlogin"> Admin Login</Link>
       </p>
     </Fragment>
   );

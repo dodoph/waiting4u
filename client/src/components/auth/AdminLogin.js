@@ -27,7 +27,7 @@ const AdminLogin = ({ adminLogin, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large mytext-primary">Administrator Sign In</h1>
+      <h1 className="large mytext-primary">Administrator Login</h1>
       <p className="lead">
         <i className="fas fa-user" /> Sign Into Your Account{" "}
       </p>
@@ -55,7 +55,7 @@ const AdminLogin = ({ adminLogin, isAuthenticated }) => {
         <input type="submit" className="btn btn-primary" value="Admin Login" />
         <p className="my-1">
           Need to sign in as public user?{" "}
-          <Link to="/login">Public User Sign In</Link>
+          <Link to="/login">Public User Login</Link>
         </p>
       </form>
     </Fragment>
