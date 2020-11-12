@@ -1,31 +1,40 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Jumbotron } from "react-bootstrap";
+
 import logo from "../../../src/img/take-me-home-logo.jpg";
 
 export const AboutUs = () => {
   return (
-    <section className="about-us">
-      <div className="dark-overlay">
-        <div className="about-us-inner">
-          <h1 className="lead mytext-center">About “Waiting4U”</h1>
-          <img src={logo} className="center" alt="take-me-home-logo"/>
-          <div className="container">
-            <p>
-              What better way to match future pet owners up with available
-              animals than a swipe-ready dating app! Our team, the “Waiting4U”,
-              will create a platform for the candidates that are looking for
-              their perfect pet-match. We will simulate the popular dating
-              experience, the only difference is that candidates are trying to
-              find their perfect four-legged friends, who provide best
-              companions and 100% loyal to them. <br></br>
-              <br></br>
-              Contact us: <br></br>
-              Email: generaladmin@waiting4u.com <br></br>
-              Phone: 123-456-7890
-            </p>
-          </div>
-        </div>
+    <Fragment>
+      <Jumbotron>
+        <h1 className="large mytext-primary mytext-center">
+          About “Waiting4U”
+        </h1>
+        <p className="lead mytext-center">Finding your purfect-match!</p>
+      </Jumbotron>
+
+      <img
+        src={logo}
+        className="center"
+        alt="take-me-home-logo"
+        style={{ maxWidth: "fit-content" }}
+      />
+      <div className="container mytext-center">
+        <p>
+          What better way to match future pet owners up with available animals
+          than a swipe-ready dating app! Our team, the “Waiting4U”, will create
+          a platform for the candidates that are looking for their perfect
+          pet-match. We will simulate the popular dating experience, the only
+          difference is that candidates are trying to find their perfect
+          four-legged friends, who provide best companions and 100% loyal to
+          them. <br></br>
+          <br></br>
+          Contact us: <br></br>
+          Email: generaladmin@waiting4u.com <br></br>
+          Phone: 123-456-7890
+        </p>
       </div>
-    </section>
+    </Fragment>
   );
 };
 
