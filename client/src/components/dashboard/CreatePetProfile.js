@@ -96,7 +96,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
   return (
     <Fragment>
-      <h2>Create a New Pet Profile</h2>
+      <h2 className="mytext-primary">Create a New Pet Profile</h2>
       <Form onSubmit={onSubmit}>
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
@@ -279,6 +279,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
             <Button type="submit">Create Pet Profile</Button>
+            <Button href="/admindashboard" style={{float:"right"}}>Cancel</Button>
           </Col>
         </Form.Group>
       </Form>

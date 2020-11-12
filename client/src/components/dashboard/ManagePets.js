@@ -98,6 +98,7 @@ const ManagePets = ({
             </thead>
             <tbody>{pets}</tbody>
           </Table>
+          <Button href="/admindashboard" style={{float:"right"}}>Go Back</Button>
         </Fragment>
       )}
     </Fragment>

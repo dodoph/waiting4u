@@ -12,7 +12,7 @@ export const MyNavbar = ({
   const adminAuthLinks = (
     <Nav className="ml-auto">
       <NavDropdown title="Hi, Admin " id="responsive-nav-dropdown">
-        <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+        <NavDropdown.Item href="/admineditprofile">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">
