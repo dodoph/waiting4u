@@ -51,6 +51,7 @@ export const getCurrentAdminProfile = () => async (dispatch) => {
     const admin_id = localStorage.getItem("token");
     if (admin_id) {
       const res = await axios.get(`${URL_HOST}/admins/${admin_id}`, getConfig);
+      console.log(res);
       dispatch({
         type: GET_PROFILE,
         payload: res.data,
@@ -253,6 +254,28 @@ export const updateUserProfile = (formData, history) => async (dispatch) => {
     });
     dispatch(setAlert("User Profile Updated", "success"));
     history.push("/dashboard");
+  } catch (err) {
+    dispatch(setAlert(err.response.data.Error, "danger"));
+  }
+};
+
+
+//Admin update profile
+export const updateAdminProfile = (formData, history) => async (dispatch) => {
+  try {
+    const admin_id = localStorage.getItem("token");
+    //console.log(formData);
+    const res = await axios.patch(
+        `${URL_HOST}/admins/${admin_id}`,
+        formData,
+        postConfig
+    );
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+    dispatch(setAlert("Admin Profile Updated", "success"));
+    history.push("/admindashboard");
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
