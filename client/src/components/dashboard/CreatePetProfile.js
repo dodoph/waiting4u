@@ -109,6 +109,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="pet_name"
               value={pet_name}
               onChange={onChange}
+              required
             />
           </Col>
         </Form.Group>
@@ -139,6 +140,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="date_of_birth"
               value={date_of_birth}
               onChange={onChange}
+              required
             />
           </Col>
         </Form.Group>
@@ -153,6 +155,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="type"
               value={type}
               onChange={onChange}
+              required
             >
               {types.map((type, index) => (
                 <option key={index}>{type}</option>
@@ -172,6 +175,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {dogBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -184,6 +188,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {catBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -196,6 +201,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {otherBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -264,6 +270,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="description"
                 value={description}
                 onChange={onChange}
+                required
               />
             </Col>
           </Form.Group>
