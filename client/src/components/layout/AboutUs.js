@@ -13,13 +13,7 @@ export const AboutUs = () => {
         <p className="lead mytext-center">Finding your purfect-match!</p>
       </Jumbotron>
 
-      <img
-        src={logo}
-        className="center"
-        alt="take-me-home-logo"
-        style={{ maxWidth: "fit-content" }}
-      />
-      <div className="container mytext-center">
+      <div>
         <p>
           What better way to match future pet owners up with available animals
           than a swipe-ready dating app! Our team, the “Waiting4U”, will create
@@ -27,8 +21,15 @@ export const AboutUs = () => {
           pet-match. We will simulate the popular dating experience, the only
           difference is that candidates are trying to find their perfect
           four-legged friends, who provide best companions and 100% loyal to
-          them. <br></br>
-          <br></br>
+          them.
+        </p>
+        <img
+          src={logo}
+          className="center"
+          alt="take-me-home-logo"
+          style={{ maxWidth: "fit-content" }}
+        />
+        <p className="mytext-center">
           Contact us: <br></br>
           Email: generaladmin@waiting4u.com <br></br>
           Phone: 123-456-7890
