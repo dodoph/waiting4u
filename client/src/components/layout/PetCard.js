@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export const PetCard = (props) => {
   const pet_name = props.pet_name.charAt(0).toUpperCase() + props.pet_name.slice(1);
-  const availability = props.availability.charAt(0).toUpperCase() + props.availability.slice(1)
 
   return (
     <Card style={props.style} key={props.index} className="text-center">

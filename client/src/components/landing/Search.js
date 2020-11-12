@@ -46,9 +46,7 @@ const catBreeds = [
 ];
 const otherBreeds = ["Other"];
 
-export const Search = ({
-  getAllPetsProfilesBySearch,
-}) => {
+export const Search = ({ getAllPetsProfilesBySearch }) => {
   const [formData, setFormData] = useState(initialState);
   const [dispositionData, setDispositionData] = useState(initialDispositions);
   const { type, breed } = formData;

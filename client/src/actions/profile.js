@@ -209,7 +209,7 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
     if (type === "All" && breed === "All" && dispositions.length === 0) {
       return getAllPetProfiles();
     }
-
+    
     let params = "";
     if (type !== "All") {
       params = params + "type=" + type.toLowerCase();
