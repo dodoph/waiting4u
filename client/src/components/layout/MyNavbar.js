@@ -11,8 +11,7 @@ export const MyNavbar = ({
 }) => {
   const adminAuthLinks = (
     <Nav className="ml-auto">
-      {/* <i className="fas fa-user-circle"></i> */}
-      <NavDropdown title="Hi, Admin " id="basic-nav-dropdown">
+      <NavDropdown title="Hi, Admin " id="responsive-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/admindashboard">Dashboard</NavDropdown.Item>
       </NavDropdown>
@@ -24,7 +23,7 @@ export const MyNavbar = ({
 
   const userAuthLinks = (
     <Nav className="ml-auto">
-      <NavDropdown title="Hi, User" id="basic-nav-dropdown">
+      <NavDropdown title="Hi, User" id="responsive-nav-dropdown">
         <NavDropdown.Item href="#">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
       </NavDropdown>
@@ -36,24 +35,27 @@ export const MyNavbar = ({
 
   const guestLinks = (
     <Nav className="ml-auto">
-      <Nav.Link href="/register">Register</Nav.Link>
-      <Nav.Link href="/login">Login</Nav.Link>
-      <Nav.Link href="/aboutus">About us</Nav.Link>
+      <Nav.Link href="/register"><i class="fas fa-user-plus"></i> Register</Nav.Link>
+      <Nav.Link href="/login"><i class="fas fa-user"></i> Login</Nav.Link>
     </Nav>
   );
 
   return (
-    <Navbar fixed="top" className="myNavbar bg-dark">
+    <Navbar fixed="top" expand="md" bg="dark" className="myNavbar">
       <h2>
         <Link to="/">
           <i className="fas fa-paw"></i> Waiting4U
         </Link>
       </h2>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
+
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/pets">Pets</Nav.Link>
+          <Nav.Link href="/aboutus">About us</Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
           {isAuthenticated
             ? role === "admin"
               ? adminAuthLinks
