@@ -37,10 +37,7 @@ const AdminEditProfile = ({setAlert, getCurrentAdminProfile, updateAdminProfile,
     const onSubmit = (e) => {
         e.preventDefault();
         let password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-        if (new_password && existing_password !== user.password) {
-            setAlert("Unauthorized operation: existing password does not match our record", "danger");
-            console.log("Unauthorized operation.");
-        } else if (new_password && !new_password.match(password_requirements)) {
+        if (new_password && !new_password.match(password_requirements)) {
             setAlert("Invalid Password.", "danger");
             console.log("Invalid Password.");
         } else if (new_password && new_password !== new_password2) {
