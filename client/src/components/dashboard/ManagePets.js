@@ -2,40 +2,39 @@ import React, { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getAdminPetProfiles, deletePetProfile } from "../../actions/profile";
 import {
-  Table,
-  Container,
-  Button,
-  Form,
-  Row,
-  Col,
-  Jumbotron,
-} from "react-bootstrap";
+  getAdminPetProfiles,
+  deletePetProfile,
+  updatePetStatus,
+} from "../../actions/profile";
+import { Table, Button, Form, Row, Col, Jumbotron } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const initialState = {
-  status: "",
-};
+const initialStates = { status: [], statusValue: "" };
 
 const ManagePets = ({
   getAdminPetProfiles,
   deletePetProfile,
+  updatePetStatus,
   petProfile: { adminsPetProfiles, loading },
 }) => {
   useEffect(() => {
     getAdminPetProfiles();
   }, []);
 
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialStates);
+  const { status, statusValue } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // update status
+  const handleOnClick = (pet_id) => {
+    status.push(statusValue);
+    updatePetStatus(status, pet_id);
+    debugger;
+    const resetFormData = { ...formData, status: [], statusValue: "" };
+    setFormData(resetFormData);
   };
 
   const pets = adminsPetProfiles
@@ -54,20 +53,24 @@ const ManagePets = ({
             <Button onClick={() => deletePetProfile(pet.pet_id)}>Delete</Button>
           </td>
           <td>
-            <Form as={Row}>
+            <Form.Group as={Row}>
               <Col>
                 <Form.Control
                   type="text"
                   as="textarea"
                   rows={2}
                   placeholder="Latest status"
-                  name="status"
+                  name="statusValue"
+                  onChange={onChange}
                 />
               </Col>
-              <Button type="submit" style={{ marginRight: "15px" }}>
+              <Button
+                style={{ marginRight: "15px" }}
+                onClick={() => handleOnClick(pet.pet_id)}
+              >
                 Update
               </Button>
-            </Form>
+            </Form.Group>
           </td>
         </tr>
       ))
@@ -98,7 +101,10 @@ const ManagePets = ({
             </thead>
             <tbody>{pets}</tbody>
           </Table>
-          <Button href="/admindashboard" style={{float:"right"}}>Go Back</Button>
+
+          <Button href="/admindashboard" style={{ float: "right" }}>
+            Go Back
+          </Button>
         </Fragment>
       )}
     </Fragment>
@@ -108,6 +114,7 @@ const ManagePets = ({
 ManagePets.propTypes = {
   getAdminPetProfiles: PropTypes.func.isRequired,
   deletePetProfile: PropTypes.func.isRequired,
+  updatePetStatus: PropTypes.func.isRequired,
   petProfile: PropTypes.object.isRequired,
 };
 
@@ -118,4 +125,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAdminPetProfiles,
   deletePetProfile,
+  updatePetStatus,
 })(ManagePets);

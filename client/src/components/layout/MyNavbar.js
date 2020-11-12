@@ -35,8 +35,8 @@ export const MyNavbar = ({
 
   const guestLinks = (
     <Nav className="ml-auto">
-      <Nav.Link href="/register"><i class="fas fa-user-plus"></i> Register</Nav.Link>
-      <Nav.Link href="/login"><i class="fas fa-user"></i> Login</Nav.Link>
+      <Nav.Link href="/register"><i className="fas fa-user-plus"></i> Register</Nav.Link>
+      <Nav.Link href="/login"><i className="fas fa-user"></i> Login</Nav.Link>
     </Nav>
   );
 

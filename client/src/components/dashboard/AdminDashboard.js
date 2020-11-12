@@ -24,7 +24,7 @@ const AdminDashboard = ({ auth: { user, loading } }) => {
             <Card className="text-center">
               <Card.Body>
                 <Card.Text>
-                  <i class="fas fa-folder-plus fa-5x"></i>
+                  <i className="fas fa-folder-plus fa-5x"></i>
                 </Card.Text>
                 <Button href="/create-pet-profile">
                   Add New Pet
@@ -35,7 +35,7 @@ const AdminDashboard = ({ auth: { user, loading } }) => {
             <Card className="text-center">
               <Card.Body>
                 <Card.Text>
-                  <i class="fas fa-folder-open fa-5x"></i>
+                  <i className="fas fa-folder-open fa-5x"></i>
                 </Card.Text>
                 <Button href="/managepets">Manage Pets</Button>
               </Card.Body>
@@ -44,7 +44,7 @@ const AdminDashboard = ({ auth: { user, loading } }) => {
             <Card className="text-center">
               <Card.Body>
                 <Card.Text>
-                  <i class="fas fa-user-edit fa-5x"></i>
+                  <i className="fas fa-user-edit fa-5x"></i>
                 </Card.Text>
                 <Button href="/admineditprofile">
                   Profile Settings
