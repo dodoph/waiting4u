@@ -14,7 +14,6 @@ const initialState = {
   type: "dog",
   breed: "Retrievers",
   availability: "available",
-  status: "",
   dispositions: [],
   description: "",
 };
@@ -88,7 +87,6 @@ const EditPetProfile = ({
     type,
     breed,
     availability,
-    status,
     description,
   } = formData;
 
@@ -122,7 +120,7 @@ const EditPetProfile = ({
 
   return petProfile ? (
     <Fragment>
-      <h2>Update Pet Profile</h2>
+      <h2 className="mytext-primary">Update Pet Profile</h2>
       <Form onSubmit={onSubmit}>
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
@@ -252,21 +250,6 @@ const EditPetProfile = ({
 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
-            Status
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control
-              type="text"
-              placeholder="Status"
-              name="status"
-              value={status}
-              onChange={onChange}
-            />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row}>
-          <Form.Label column sm={2}>
             Despositions
           </Form.Label>
           <Col sm={10}>
@@ -304,6 +287,7 @@ const EditPetProfile = ({
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
             <Button type="submit">Update Pet Profile</Button>
+            <Button href="/admindashboard" style={{float: "right"}}>Cancel</Button>
           </Col>
         </Form.Group>
       </Form>

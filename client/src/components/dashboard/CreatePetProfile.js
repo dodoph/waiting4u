@@ -79,7 +79,11 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
         dispositions.push(disposition.value);
       }
     })
-    const updatedFormData = { ...formData, dispositions: dispositions };
+    let statusData = [];
+    if (status) {
+      statusData.push(status);
+    }
+    const updatedFormData = { ...formData, dispositions: dispositions, status: statusData };
     setFormData(updatedFormData);
     createPetProfile(updatedFormData, history);
   };

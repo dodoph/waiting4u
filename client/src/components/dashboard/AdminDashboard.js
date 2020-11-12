@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { loadAdmin } from "../../actions/auth";
-import { Button, CardDeck, Row, Col, Jumbotron, Card } from "react-bootstrap";
+import { Button, CardDeck, Jumbotron, Card } from "react-bootstrap";
 
 const AdminDashboard = ({ auth: { user, loading } }) => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const AdminDashboard = ({ auth: { user, loading } }) => {
         <Fragment>
           <Jumbotron className="mytext-primary mytext-center">
             <h1 className="large">Admin Dashboard</h1>
-            <p className="lead">Welcome back, {user.userName}!</p>
+            <p className="lead">Welcome back, {user ? user.userName : "Admin"}!</p>
           </Jumbotron>
           <CardDeck>
             <Card className="text-center">

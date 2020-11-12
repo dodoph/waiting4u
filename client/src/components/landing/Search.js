@@ -83,8 +83,7 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
   return (
     <Col xs={12} md={3} lg={3}>
       <Form onSubmit={onSubmit}>
-        <Row className="lead mytext-primary">Search by:</Row>
-
+        <Row className="h4 mytext-primary">Search by:</Row>
         <Form.Label as={Row}>Type:</Form.Label>
         <Form.Group as={Row}>
           <Form.Control
