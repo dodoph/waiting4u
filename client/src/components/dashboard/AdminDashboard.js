@@ -27,6 +27,9 @@ const AdminDashboard = ({
           <Col>
             <Button href="/managepets">Manage Pet Profiles</Button>
           </Col>
+          <Col>
+            <Button href="/admineditprofile">View/Update Admin Profile</Button>
+          </Col>
         </Row>
       </Container>
     </Fragment>
