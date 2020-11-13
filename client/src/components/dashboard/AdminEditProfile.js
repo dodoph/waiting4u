@@ -39,26 +39,22 @@ const AdminEditProfile = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    let password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-    if (new_password && existing_password !== user.password) {
-      setAlert(
-        "Unauthorized operation: existing password does not match our record",
-        "danger"
-      );
-      console.log("Unauthorized operation.");
-    } else if (new_password && !new_password.match(password_requirements)) {
-      setAlert("Invalid Password.", "danger");
-      console.log("Invalid Password.");
-    } else if (new_password && new_password !== new_password2) {
-      setAlert("Passwords don't match!", "danger");
-      console.log("password doesn't match");
-    } else {
-      updateAdminProfile(formData, history);
-      console.log("SUCCESS!");
-    }
-  };
+    const onSubmit = (e) => {
+        e.preventDefault();
+        let password_requirements = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+        if (new_password && !new_password.match(password_requirements)) {
+            setAlert("Invalid Password.", "danger");
+            console.log("Invalid Password.");
+        } else if (new_password && new_password !== new_password2) {
+            setAlert(
+                "Passwords don't match!",
+                "danger"
+            );
+            console.log("password doesn't match");
+        } else {
+            updateAdminProfile(formData, history);
+        }
+    };
 
   return user ? (
     <Fragment>
