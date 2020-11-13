@@ -48,7 +48,6 @@ const AdminEditProfile = ({setAlert, getCurrentAdminProfile, updateAdminProfile,
             console.log("password doesn't match");
         } else {
             updateAdminProfile(formData, history);
-            console.log("SUCCESS!");
         }
     };
 

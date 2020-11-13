@@ -55,7 +55,6 @@ const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, hi
             console.log("password doesn't match");
         } else {
             updateUserProfile(formData, history);
-            console.log("SUCCESS!");
         }
     };
 
