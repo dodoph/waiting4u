@@ -12,7 +12,7 @@ const initialState = {
   date_of_birth: "",
   type: "dog",
   breed: "Retrievers",
-  availability: "available",
+  availability: "Available",
   status: "",
   dispositions: [],
   description: "",
@@ -79,7 +79,11 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
         dispositions.push(disposition.value);
       }
     })
-    const updatedFormData = { ...formData, dispositions: dispositions };
+    let statusData = [];
+    if (status) {
+      statusData.push(status);
+    }
+    const updatedFormData = { ...formData, dispositions: dispositions, status: statusData };
     setFormData(updatedFormData);
     createPetProfile(updatedFormData, history);
   };
@@ -96,7 +100,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
   return (
     <Fragment>
-      <h2>Create a New Pet Profile</h2>
+      <h2 className="mytext-primary">Create a New Pet Profile</h2>
       <Form onSubmit={onSubmit}>
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
@@ -109,6 +113,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="pet_name"
               value={pet_name}
               onChange={onChange}
+              required
             />
           </Col>
         </Form.Group>
@@ -139,6 +144,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="date_of_birth"
               value={date_of_birth}
               onChange={onChange}
+              required
             />
           </Col>
         </Form.Group>
@@ -153,6 +159,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               name="type"
               value={type}
               onChange={onChange}
+              required
             >
               {types.map((type, index) => (
                 <option key={index}>{type}</option>
@@ -172,6 +179,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {dogBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -184,6 +192,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {catBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -196,6 +205,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="breed"
                 value={breed}
                 onChange={onChange}
+                required
               >
                 {otherBreeds.map((breed, index) => (
                   <option key={index}>{breed}</option>
@@ -216,10 +226,10 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
               value={availability}
               onChange={onChange}
             >
-              <option value="available">Available</option>
-              <option value="pending">Pending</option>
-              <option value="not-available">Not Available</option>
-              <option value="adopted">Adopted</option>
+              <option value="Available">Available</option>
+              <option value="Pending">Pending</option>
+              <option value="Not-available">Not Available</option>
+              <option value="Adopted">Adopted</option>
             </Form.Control>
           </Col>
         </Form.Group>
@@ -264,6 +274,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
                 name="description"
                 value={description}
                 onChange={onChange}
+                required
               />
             </Col>
           </Form.Group>
@@ -272,6 +283,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
             <Button type="submit">Create Pet Profile</Button>
+            <Button href="/admindashboard" style={{float:"right"}}>Cancel</Button>
           </Col>
         </Form.Group>
       </Form>

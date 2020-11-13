@@ -22,7 +22,7 @@ const MyCards = ({
       {noPetFound ? (
         <NoPetFound />
       ) : allPetProfiles ? (
-        <CardDeck className="d-flex justify-content-center">
+          <CardDeck className="d-flex justify-content-center">
           {allPetProfiles.map((pet, index) => {
             return (
               <div key={index} className="mb-4" >

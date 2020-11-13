@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getAllPetProfiles } from "../../actions/profile";
-import { Container, CardDeck } from "react-bootstrap";
+import { CardDeck, Jumbotron } from "react-bootstrap";
 import PetCard from "../layout/PetCard";
 
 const Pets = ({
@@ -14,23 +14,37 @@ const Pets = ({
     getAllPetProfiles();
   }, []);
 
-  return loading && allPetProfiles === null ? (
-    <Spinner />
-  ) : (
+  return (
     <Fragment>
-      <Container>
+      <Jumbotron>
         <h1 className="large mytext-primary mytext-center">View All Pets</h1>
-      </Container>
+        <p className="mytext-center">
+          Click the more info button to view a complete profile.
+        </p>
+      </Jumbotron>
 
-      <CardDeck className="d-flex justify-content-center">
-        {allPetProfiles.map((pet, index) => {
-          return (
-            <div key={index} className="mb-4">
-              <PetCard style={{ width: "18rem" }} {...pet} />
-            </div>
-          );
-        })}
-      </CardDeck>
+      {loading && allPetProfiles === null ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          {allPetProfiles.length > 0 ? (
+          <CardDeck className="d-flex justify-content-center">
+            {allPetProfiles.map((pet, index) => {
+              return (
+                <div key={index} className="mb-4">
+                  <PetCard style={{ width: "18rem" }} {...pet} />
+                </div>
+              );
+            })}
+          </CardDeck>
+          ) : (
+          <div>
+            Sorry we do not have any available pets at this moment, please check
+            back later.
+          </div>
+          )}
+        </Fragment>
+      )}
     </Fragment>
   );
 };

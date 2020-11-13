@@ -119,6 +119,7 @@ export const getPetProfile = (pet_id) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -155,6 +156,21 @@ export const updatePetProfile = (formData, history, pet_id) => async (dispatch) 
     });
     dispatch(setAlert("Pet Profile Updated", "success"));
     history.push("/managepets");
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Update a pet status
+export const updatePetStatus = (status, pet_id) => async (dispatch) => {
+  try {
+    const admin_id = localStorage.getItem("token");
+    const res = await axios.patch(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}/status`, {"status": status}, postConfig );
+    console.log(res);
+    dispatch(setAlert("Pet Status Updated", "success"));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -210,7 +226,7 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
     if (type === "All" && breed === "All" && dispositions.length === 0) {
       return getAllPetProfiles();
     }
-
+    
     let params = "";
     if (type !== "All") {
       params = params + "type=" + type.toLowerCase();

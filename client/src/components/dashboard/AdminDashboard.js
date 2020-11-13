@@ -3,35 +3,57 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { loadAdmin } from "../../actions/auth";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, CardDeck, Jumbotron, Card } from "react-bootstrap";
 
-const AdminDashboard = ({
-  auth: { user, loading },
-}) => {
+const AdminDashboard = ({ auth: { user, loading } }) => {
   useEffect(() => {
     loadAdmin(localStorage.getItem("token"));
   }, []);
 
-  return loading && user === null ? (
-    <Spinner />
-  ) : (
+  return (
     <Fragment>
-      <Container >
-        <h1 className="large mytext-primary mytext-center">Admin Dashboard</h1>
-      </Container>
-      <Container>
-        <Row >
-          <Col>
-            <Button href="/create-pet-profile">Create New Pet Profile</Button>
-          </Col>
-          <Col>
-            <Button href="/managepets">Manage Pet Profiles</Button>
-          </Col>
-          <Col>
-            <Button href="/admineditprofile">View/Update Admin Profile</Button>
-          </Col>
-        </Row>
-      </Container>
+      {loading && user === null ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <Jumbotron className="mytext-primary mytext-center">
+            <h1 className="large">Admin Dashboard</h1>
+            <p className="lead">Welcome back, {user ? user.userName : "Admin"}!</p>
+          </Jumbotron>
+          <CardDeck>
+            <Card className="text-center">
+              <Card.Body>
+                <Card.Text>
+                  <i className="fas fa-folder-plus fa-5x"></i>
+                </Card.Text>
+                <Button href="/create-pet-profile">
+                  Add New Pet
+                </Button>
+              </Card.Body>
+            </Card>
+
+            <Card className="text-center">
+              <Card.Body>
+                <Card.Text>
+                  <i className="fas fa-folder-open fa-5x"></i>
+                </Card.Text>
+                <Button href="/managepets">Manage Pets</Button>
+              </Card.Body>
+            </Card>
+
+            <Card className="text-center">
+              <Card.Body>
+                <Card.Text>
+                  <i className="fas fa-user-edit fa-5x"></i>
+                </Card.Text>
+                <Button href="/admineditprofile">
+                  Profile Settings
+                </Button>
+              </Card.Body>
+            </Card>
+          </CardDeck>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
