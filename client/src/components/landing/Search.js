@@ -46,6 +46,8 @@ const catBreeds = [
 ];
 const otherBreeds = ["Other"];
 
+const sortedBy = ["Best Match", "Created Date", "Birthday"];
+
 export const Search = ({ getAllPetsProfilesBySearch }) => {
   const [formData, setFormData] = useState(initialState);
   const [dispositionData, setDispositionData] = useState(initialDispositions);
@@ -159,6 +161,20 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
               />
             );
           })}
+        </Form.Group>
+
+        <Form.Label as={Row}>Sorted by:</Form.Label>
+        <Form.Group as={Row}>
+          <Form.Control
+            as="select"
+            name="sorted_by"
+            value={sortedBy}
+            // onChange={onChange}
+          >
+            {sortedBy.map((option, index) => (
+              <option key={index}>{option}</option>
+            ))}
+          </Form.Control>
         </Form.Group>
 
         <Row>
