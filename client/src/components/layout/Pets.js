@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
@@ -26,6 +26,8 @@ const Pets = ({
   getAllPetProfilesSortedBy,
   petProfile: { allPetProfiles, loading },
 }) => {
+  const [sortedByState, setSortedByState] = useState("Best Match");
+
   useEffect(() => {
     if (!allPetProfiles) {
       getAllPetProfiles();
@@ -35,6 +37,7 @@ const Pets = ({
   const onChange = (event) => {
     sortedBy.options.forEach(option => {
       if (event.target.value === option.value) {
+        setSortedByState(option.value);
         getAllPetProfilesSortedBy(option.sort, option.order);
       }
     });
@@ -56,7 +59,7 @@ const Pets = ({
             <Form.Control
               as="select"
               name="sorted_by"
-              value={sortedBy}
+              value={sortedByState}
               onChange={onChange}
             >
               {sortedBy.options.map((option, id) => (
