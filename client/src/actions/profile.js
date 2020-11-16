@@ -251,6 +251,23 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
   }
 };
 
+// Get all pet profiles sorted by
+export const getAllPetProfilesSortedBy = (sort, order) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets?sort=${sort}&order=${order}`, getConfig);
+    console.log(res);
+    dispatch({
+      type: GET_ALL_PET_PROFILES,
+      payload: res.data.length === 0 ? [] : res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
+
 //user update profile
 export const updateUserProfile = (formData, history) => async (dispatch) => {
   try {
