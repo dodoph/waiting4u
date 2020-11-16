@@ -6,14 +6,12 @@ import { getAllPetProfiles } from "../../actions/profile";
 import {
   CardDeck,
   Jumbotron,
-  Row,
   Form,
   Container,
-  Card,
 } from "react-bootstrap";
 import PetCard from "../layout/PetCard";
 
-const sortedBy = ["Best Match", "Created Date", "Birthday"];
+const sortedBy = ["Best Match", "Created Date (Ascending)", "Age (Ascending)", "Age (Descending)"];
 
 const Pets = ({
   getAllPetProfiles,

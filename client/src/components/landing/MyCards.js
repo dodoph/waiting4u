@@ -12,8 +12,10 @@ const MyCards = ({
   petProfile: { allPetProfiles },
 }) => {
   useEffect(() => {
-    getAllPetProfiles();
-  }, []);
+    if (!allPetProfiles) {
+      getAllPetProfiles();
+    }
+  }, [allPetProfiles]);
 
   const noPetFound = allPetProfiles ? allPetProfiles.length === 0 : false;
 

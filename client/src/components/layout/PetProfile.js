@@ -35,6 +35,7 @@ const PetProfile = ({
         <div> A little bit about myself: {petProfile.description}.</div>
         <div>Availability: {petProfile.availability}</div>
         <div>Dispositions: {petProfile.dispositions}</div>
+        <div>Status: {petProfile.status}</div>
         <Button onClick={() => history.goBack()}>GO BACK</Button>
       </Container>
     </Fragment>

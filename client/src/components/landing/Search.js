@@ -3,7 +3,7 @@ import { Col, Row, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CheckBox from "../dashboard/CheckBox";
-import { getAllPetsProfilesBySearch } from "../../actions/profile";
+import { getAllPetProfiles, getAllPetsProfilesBySearch } from "../../actions/profile";
 
 const initialState = {
   type: "All",
@@ -44,11 +44,9 @@ const catBreeds = [
   "Siamese",
   "Other",
 ];
-const otherBreeds = ["Other"];
+const otherBreeds = ["All"];
 
-const sortedBy = ["Best Match", "Created Date", "Birthday"];
-
-export const Search = ({ getAllPetsProfilesBySearch }) => {
+export const Search = ({ getAllPetProfiles, getAllPetsProfilesBySearch }) => {
   const [formData, setFormData] = useState(initialState);
   const [dispositionData, setDispositionData] = useState(initialDispositions);
   const { type, breed } = formData;
@@ -69,7 +67,16 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
     const updatedFormData = { ...formData, dispositions: dispositions };
     console.log(updatedFormData);
     setFormData(updatedFormData);
-    getAllPetsProfilesBySearch(updatedFormData);
+    
+    if (type === "All" && breed === "All" && dispositions.length === 0) {
+      getAllPetProfiles();
+    } else {
+      getAllPetsProfilesBySearch(updatedFormData);
+    }
+  };
+
+  const handleTypeChange = (event) => {
+    setFormData({ ...formData, type: event.target.value, breed: "All" });
   };
 
   const handleCheckElement = (event) => {
@@ -92,7 +99,7 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
             as="select"
             name="type"
             value={type}
-            onChange={onChange}
+            onChange={handleTypeChange}
           >
             {types.map((type, index) => (
               <option key={index}>{type}</option>
@@ -163,20 +170,6 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
           })}
         </Form.Group>
 
-        <Form.Label as={Row}>Sorted by:</Form.Label>
-        <Form.Group as={Row}>
-          <Form.Control
-            as="select"
-            name="sorted_by"
-            value={sortedBy}
-            // onChange={onChange}
-          >
-            {sortedBy.map((option, index) => (
-              <option key={index}>{option}</option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-
         <Row>
           <Form.Group as={Row}>
             <Col sm={{ span: 10, offset: 2 }}>
@@ -190,7 +183,8 @@ export const Search = ({ getAllPetsProfilesBySearch }) => {
 };
 
 Search.propTypes = {
+  getAllPetProfiles: PropTypes.func.isRequired,
   getAllPetsProfilesBySearch: PropTypes.func.isRequired,
 };
 
-export default connect(null, { getAllPetsProfilesBySearch })(Search);
+export default connect(null, { getAllPetProfiles, getAllPetsProfilesBySearch })(Search);

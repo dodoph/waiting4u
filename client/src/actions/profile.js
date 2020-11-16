@@ -223,10 +223,6 @@ export const getAllPetProfiles = () => async (dispatch) => {
 export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
   try {
     const { type, breed, dispositions } = formData;
-    if (type === "All" && breed === "All" && dispositions.length === 0) {
-      return getAllPetProfiles();
-    }
-    
     let params = "";
     if (type !== "All") {
       params = params + "type=" + type.toLowerCase();
