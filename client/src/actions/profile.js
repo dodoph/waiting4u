@@ -223,10 +223,6 @@ export const getAllPetProfiles = () => async (dispatch) => {
 export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
   try {
     const { type, breed, dispositions } = formData;
-    if (type === "All" && breed === "All" && dispositions.length === 0) {
-      return getAllPetProfiles();
-    }
-    
     let params = "";
     if (type !== "All") {
       params = params + "type=" + type.toLowerCase();
@@ -242,6 +238,23 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
       }
     }
     const res = await axios.get(`${URL_HOST}/pets?${params}`, getConfig);
+    console.log(res);
+    dispatch({
+      type: GET_ALL_PET_PROFILES,
+      payload: res.data.length === 0 ? [] : res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
+
+// Get all pet profiles sorted by
+export const getAllPetProfilesSortedBy = (sort, order) => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets?sort=${sort}&order=${order}`, getConfig);
     console.log(res);
     dispatch({
       type: GET_ALL_PET_PROFILES,
