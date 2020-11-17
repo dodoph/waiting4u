@@ -12,6 +12,7 @@ const initialState = {
     new_password: "",
     new_password2: "",
     introduction: "",
+    preference: "",
 };
 
 const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, history, auth: {user, loading},}) => {
@@ -20,6 +21,7 @@ const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, hi
     useEffect(() => {
         if (!user) {
             getCurrentUserProfile();
+            console.log(user);
         }
         if (!loading && user) {
             setFormData(user);
@@ -31,6 +33,7 @@ const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, hi
         new_password,
         new_password2,
         introduction,
+        preference,
     } = formData;
 
     const onChange = (e) => {
@@ -110,14 +113,14 @@ const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, hi
                 <fieldset>
                     <Form.Group as={Row}>
                         <Form.Label column sm={2}>
-                            Introduction
+                            Self Introduction
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control
                                 type="Introduction"
                                 placeholder="New Introduction"
                                 as="textarea"
-                                rows={5}
+                                rows={3}
                                 name="introduction"
                                 value={introduction}
                                 onChange={onChange}
@@ -125,6 +128,28 @@ const UserEditProfile = ({setAlert, getCurrentUserProfile, updateUserProfile, hi
                         </Col>
                     </Form.Group>
                 </fieldset>
+
+                <h3>Update Email Preference</h3>
+
+                <Form.Group as={Row}>
+                    <Form.Label column sm={2}>
+                        Email Preference
+                    </Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            as="select"
+                            name="preference"
+                            value={preference}
+                            onChange={onChange}
+                        >
+                            <option value= "" ></option>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Unsubscribe">Unsubscribe</option>
+                        </Form.Control>
+                    </Col>
+                </Form.Group>
 
                 <Form.Group as={Row}>
                     <Col sm={{span: 10, offset: 2}}>
