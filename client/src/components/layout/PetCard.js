@@ -6,6 +6,10 @@ export const PetCard = (props) => {
   const pet_name =
     props.pet_name.charAt(0).toUpperCase() + props.pet_name.slice(1);
 
+  const handleLikeButton = () => {
+
+  }
+
   return (
     <Card style={props.style} key={props.index} className="text-center">
       {props.image_url ? (
@@ -15,7 +19,7 @@ export const PetCard = (props) => {
           <i className="fas fa-dog fa-7x" style={{ color: "white" }}></i>
         </div>
       )}
-      <div className="like-button-div">
+      <div className="btn like-button-div" onClick={handleLikeButton}>
         <i className="fas fa-heart fa-2x like-button-icon"></i>
       </div>
       <Card.Body>
