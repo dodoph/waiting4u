@@ -18,7 +18,7 @@ const AdminDashboard = ({ auth: { user, loading } }) => {
         <Fragment>
           <Jumbotron className="mytext-primary mytext-center">
             <h1 className="large">Admin Dashboard</h1>
-            <p className="lead">Welcome back, {user ? user.userName : "Admin"}!</p>
+            <p className="lead">Welcome back, {user ? user.admin_name : "Admin"}!</p>
           </Jumbotron>
           <CardDeck>
             <Card className="text-center">

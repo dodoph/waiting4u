@@ -7,7 +7,7 @@ export const AboutUs = () => {
   return (
     <Fragment>
       <Jumbotron>
-        <h1 className="large mytext-primary mytext-center">
+        <h1 className="page-header">
           About “Waiting4U”
         </h1>
         <p className="lead mytext-center">Finding your purfect-match!</p>

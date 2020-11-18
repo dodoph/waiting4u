@@ -46,7 +46,7 @@ const Pets = ({
   return (
     <Fragment>
       <Jumbotron>
-        <h1 className="large mytext-primary mytext-center">View All Pets</h1>
+        <h1 className="page-header">View All Pets</h1>
         <p className="mytext-center">
           Click the more info button to view a complete profile.
         </p>

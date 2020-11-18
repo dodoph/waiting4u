@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import { getPetProfileViewOnly } from "../../actions/profile";
 import { connect } from "react-redux";
-import { Button, Container } from "react-bootstrap";
+import { Button, Jumbotron } from "react-bootstrap";
 import img_placeholder from "../../img/dog-solid.svg";
 import { withRouter } from "react-router-dom";
 
@@ -19,9 +19,15 @@ const PetProfile = ({
 
   return petProfile ? (
     <Fragment>
-      <h2>Hello, happy to meet you! I am {petProfile.pet_name}!</h2>
-      <Container>
-        <img src={petProfile.image_url ? petProfile.image_url : img_placeholder}></img>
+      <Jumbotron className="page-header">
+        Hello, I am {petProfile.pet_name}!
+      </Jumbotron>
+      <img
+        src={petProfile.image_url ? petProfile.image_url : img_placeholder}
+        style={{ maxWidth: "500px" }}
+        className="center"
+      ></img>
+      <div className="pet-profile">
         <div>
           My name is <strong>{petProfile.pet_name}</strong>!
         </div>
@@ -32,12 +38,13 @@ const PetProfile = ({
         <div>
           I am a {petProfile.type}, {petProfile.breed} breed.{" "}
         </div>
-        <div> A little bit about myself: {petProfile.description}.</div>
+        <div>A little bit about myself: {petProfile.description}</div>
         <div>Availability: {petProfile.availability}</div>
         <div>Dispositions: {petProfile.dispositions}</div>
-        <div>Status: {petProfile.status}</div>
-        <Button onClick={() => history.goBack()}>GO BACK</Button>
-      </Container>
+        <div>Updates: {petProfile.status}</div>
+        <div>Nice to meet you!</div>
+      </div>
+      <Button onClick={() => history.goBack()}>GO BACK</Button>
     </Fragment>
   ) : (
     <Spinner />
@@ -53,4 +60,6 @@ const mapStateToProps = (state) => ({
   petProfile: state.petProfile,
 });
 
-export default connect(mapStateToProps, { getPetProfileViewOnly })(withRouter(PetProfile));
+export default connect(mapStateToProps, { getPetProfileViewOnly })(
+  withRouter(PetProfile)
+);

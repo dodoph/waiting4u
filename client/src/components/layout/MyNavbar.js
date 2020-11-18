@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-export const MyNavbar = ({
-  auth: { role, isAuthenticated, loading, user },
-  logout,
-}) => {
+export const MyNavbar = ({ auth: { role, isAuthenticated }, logout }) => {
   const adminAuthLinks = (
     <Nav className="ml-auto">
       <NavDropdown title="Hi, Admin " id="responsive-nav-dropdown">
@@ -35,8 +32,12 @@ export const MyNavbar = ({
 
   const guestLinks = (
     <Nav className="ml-auto">
-      <Nav.Link href="/register"><i className="fas fa-user-plus"></i> Register</Nav.Link>
-      <Nav.Link href="/login"><i className="fas fa-user"></i> Login</Nav.Link>
+      <Nav.Link href="/register">
+        <i className="fas fa-user-plus"></i> Register
+      </Nav.Link>
+      <Nav.Link href="/login">
+        <i className="fas fa-user"></i> Login
+      </Nav.Link>
     </Nav>
   );
 
@@ -44,7 +45,8 @@ export const MyNavbar = ({
     <Navbar fixed="top" expand="md" bg="dark" className="myNavbar">
       <h2>
         <Link to="/">
-          <i className="fas fa-paw"></i> Waiting4U
+          <i className="fas fa-paw fa-xs"></i>
+          <span className="navbar-header">Waiting4U</span>
         </Link>
       </h2>
 
