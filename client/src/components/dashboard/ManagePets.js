@@ -42,7 +42,13 @@ const ManagePets = ({
         <tr key={pet.pet_id}>
           <td>{pet.pet_name}</td>
           <td>
-            <img src={pet.image_url} style={{ maxWidth: "10rem" }} />
+            {pet.image_url ? (
+              <img src={pet.image_url} style={{ maxWidth: "10rem" }} />
+            ) : (
+              <div style={{ padding: "2rem", background: "#d3d3d3", maxWidth: "150px" }}>
+                <i className="fas fa-dog fa-5x" style={{ color: "white" }}></i>
+              </div>
+            )}
           </td>
           <td>
             <Link to={`/edit-pet-profile/${pet.pet_id}`}>

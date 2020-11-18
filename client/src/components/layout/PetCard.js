@@ -19,7 +19,7 @@ export const PetCard = (props) => {
           <i className="fas fa-dog fa-7x" style={{ color: "white" }}></i>
         </div>
       )}
-      <div className="btn like-button-div" onClick={handleLikeButton}>
+      <div className="like-button-div" onClick={handleLikeButton}>
         <i className="fas fa-heart fa-2x like-button-icon"></i>
       </div>
       <Card.Body>
