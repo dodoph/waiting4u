@@ -17,8 +17,8 @@ const PetProfile = ({
     getPetProfileViewOnly(params.id);
   }, [params.id]);
 
-  const dispositions_values = petProfile && petProfile.dispositions.length > 0 ? petProfile.dispositions.join("\n") : "N/A";
-  const status_values = petProfile && petProfile.status.length > 0 ? petProfile.status.join("\n") : "N/A";
+  const dispositions_values = petProfile && petProfile.dispositions.length > 0 ? petProfile.dispositions.join("; ") : "N/A";
+  const status_values = petProfile && petProfile.status.length > 0 ? petProfile.status.join("; ") : "N/A";
 
   return petProfile ? (
     <Fragment>
