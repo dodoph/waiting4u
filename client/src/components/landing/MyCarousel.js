@@ -1,39 +1,43 @@
-import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
-import img1 from "../../img/carousels-img1.jpg";
-import img2 from "../../img/carousels-img2.jpg";
-import img3 from "../../img/carousels-img3.jpg";
+import { getRecentUpdates } from "../../actions/profile";
+import Spinner from "../layout/Spinner";
 
-export const MyCarousel = () => {
+const MyCarousel = ({
+    getRecentUpdates,
+    petProfile: { petUpdateProfiles },
+}) => {
+    useEffect(() => {
+        if(!petUpdateProfiles) {
+            getRecentUpdates();
+        }
+    }, [petUpdateProfiles]);
   return (
     <Carousel>
-      <Carousel.Item>
-        <img className="myCarousel-item" src={img1} alt="First slide" />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className="myCarousel-item" src={img2} alt="Third slide" />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className="myCarousel-item" src={img3} alt="Third slide" />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+        {petUpdateProfiles ? (petUpdateProfiles.map((pet, index) =>{
+            return (
+                <Carousel.Item>
+                    <img className="myCarousel-item" src={pet.image_url} alt="slide" />
+                    <Carousel.Caption>
+                        <h3>{pet.pet_name}</h3>
+                        <p>{pet.status}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            );
+        })) : (<Spinner />)}
     </Carousel>
   );
 };
 
-export default MyCarousel;
+MyCarousel.propTypes = {
+    getRecentUpdates: PropTypes.func.isRequired,
+    petProfile: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = (state) => ({
+    petProfile: state.petProfile,
+});
+
+export default connect(mapStateToProps, { getRecentUpdates })(MyCarousel);
