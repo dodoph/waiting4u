@@ -355,12 +355,20 @@ button {
 }
 
 .myCarousel-item {
-  width: 95%;
+  width:1000px;
   max-height: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
+@media (max-width: 1000px) {
+  .myCarousel-item {
+    width:auto;
+    height:auto;
+  }
+}
+
 
 /* Profiles Page */
 .profile {
