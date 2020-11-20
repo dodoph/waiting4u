@@ -9,6 +9,7 @@ import {
   UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
+  GET_ALL_LIKED_PET_PROFILES,
 } from "./types";
 
 // Global config settings
@@ -112,7 +113,10 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
 export const getPetProfile = (pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.get(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, getConfig );
+    const res = await axios.get(
+      `${URL_HOST}/admins/${admin_id}/pets/${pet_id}`,
+      getConfig
+    );
     console.log(res);
     dispatch({
       type: GET_PET_PROFILE,
@@ -130,7 +134,7 @@ export const getPetProfile = (pet_id) => async (dispatch) => {
 // Get a pet profile (public view)
 export const getPetProfileViewOnly = (pet_id) => async (dispatch) => {
   try {
-    const res = await axios.get(`${URL_HOST}/pets/${pet_id}`, getConfig );
+    const res = await axios.get(`${URL_HOST}/pets/${pet_id}`, getConfig);
     console.log(res);
     dispatch({
       type: GET_PET_PROFILE,
@@ -145,10 +149,16 @@ export const getPetProfileViewOnly = (pet_id) => async (dispatch) => {
 };
 
 // Update a pet profile
-export const updatePetProfile = (formData, history, pet_id) => async (dispatch) => {
+export const updatePetProfile = (formData, history, pet_id) => async (
+  dispatch
+) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.put(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}`, formData, postConfig );
+    const res = await axios.put(
+      `${URL_HOST}/admins/${admin_id}/pets/${pet_id}`,
+      formData,
+      postConfig
+    );
     console.log(res);
     dispatch({
       type: UPDATE_PET_PROFILE,
@@ -168,7 +178,11 @@ export const updatePetProfile = (formData, history, pet_id) => async (dispatch) 
 export const updatePetStatus = (status, pet_id) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
-    const res = await axios.patch(`${URL_HOST}/admins/${admin_id}/pets/${pet_id}/status`, {"status": status}, postConfig );
+    const res = await axios.patch(
+      `${URL_HOST}/admins/${admin_id}/pets/${pet_id}/status`,
+      { status: status },
+      postConfig
+    );
     console.log(res);
     dispatch(setAlert("Pet Status Updated", "success"));
   } catch (err) {
@@ -254,7 +268,10 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
 // Get all pet profiles sorted by
 export const getAllPetProfilesSortedBy = (sort, order) => async (dispatch) => {
   try {
-    const res = await axios.get(`${URL_HOST}/pets?sort=${sort}&order=${order}`, getConfig);
+    const res = await axios.get(
+      `${URL_HOST}/pets?sort=${sort}&order=${order}`,
+      getConfig
+    );
     console.log(res);
     dispatch({
       type: GET_ALL_PET_PROFILES,
@@ -268,14 +285,53 @@ export const getAllPetProfilesSortedBy = (sort, order) => async (dispatch) => {
   }
 };
 
+// Get all pet profiles that a user liked
+export const getUserLikedPets = () => async (dispatch) => {
+  try {
+    const user_id = localStorage.getItem("token");
+    const res = await axios.get(
+      `${URL_HOST}/user/${user_id}/liked-pets`,
+      getConfig
+    );
+    console.log(res);
+    dispatch({
+      type: GET_ALL_LIKED_PET_PROFILES,
+      payload: res.data.length === 0 ? [] : res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
+
+// User like a pet
+export const likeAPet = (pet_id) => async (dispatch) => {
+  try {
+    const user_id = localStorage.getItem("token");
+    const res = await axios.patch(
+      `${URL_HOST}/user/${user_id}/like-pet/${pet_id}`,
+      postConfig
+    );
+    console.log(res);
+    dispatch(setAlert("Added the pet to your favorite list!", "success"));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
+
 //user update profile
 export const updateUserProfile = (formData, history) => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
     const res = await axios.patch(
-        `${URL_HOST}/users/${user_id}`,
-        formData,
-        postConfig
+      `${URL_HOST}/users/${user_id}`,
+      formData,
+      postConfig
     );
     dispatch({
       type: GET_PROFILE,
@@ -288,16 +344,15 @@ export const updateUserProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-
 //Admin update profile
 export const updateAdminProfile = (formData, history) => async (dispatch) => {
   try {
     const admin_id = localStorage.getItem("token");
     //console.log(formData);
     const res = await axios.patch(
-        `${URL_HOST}/admins/${admin_id}`,
-        formData,
-        postConfig
+      `${URL_HOST}/admins/${admin_id}`,
+      formData,
+      postConfig
     );
     dispatch({
       type: GET_PROFILE,

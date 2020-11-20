@@ -21,7 +21,7 @@ export const MyNavbar = ({ auth: { role, isAuthenticated }, logout }) => {
   const userAuthLinks = (
     <Nav className="ml-auto">
       <NavDropdown title="Hi, User" id="responsive-nav-dropdown">
-        <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+        <NavDropdown.Item href="/usereditprofile">Profile</NavDropdown.Item>
         <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link onClick={logout} href="#">

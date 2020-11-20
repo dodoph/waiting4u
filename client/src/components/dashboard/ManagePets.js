@@ -32,7 +32,6 @@ const ManagePets = ({
   const handleOnClick = (pet_id) => {
     status.push(statusValue);
     updatePetStatus(status, pet_id);
-    debugger;
     const resetFormData = { ...formData, status: [], statusValue: "" };
     setFormData(resetFormData);
   };
