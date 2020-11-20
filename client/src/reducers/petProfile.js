@@ -6,7 +6,7 @@ import {
   CLEAR_PET_PROFILE,
   CLEAR_ADMINS_PET_PROFILES,
   PROFILE_ERROR,
-  GET_LATEST_PET_UPDATE_PROFILES
+  GET_LATEST_PET_STATUS
 } from "../actions/types";
 
 const initialState = {
@@ -59,7 +59,7 @@ export default function (state = initialState, action) {
         error: payload,
         loading: false,
       };
-    case GET_LATEST_PET_UPDATE_PROFILES:
+    case GET_LATEST_PET_STATUS:
       return {
         ...state,
         petUpdateProfiles: payload,
