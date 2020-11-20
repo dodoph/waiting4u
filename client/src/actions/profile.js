@@ -9,7 +9,7 @@ import {
   UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
-  GET_LATEST_PET_UPDATE_PROFILES
+  GET_LATEST_PET_STATUS
 } from "./types";
 
 // Global config settings
@@ -312,12 +312,12 @@ export const updateAdminProfile = (formData, history) => async (dispatch) => {
 };
 
 //Get recent updates
-export const getRecentUpdates = () => async (dispatch) => {
+export const getRecentStatusUpdate = () => async (dispatch) => {
   try {
     const res = await axios.get(`${URL_HOST}/pets/status`, getConfig);
     console.log(res);
     dispatch({
-      type: GET_LATEST_PET_UPDATE_PROFILES,
+      type: GET_LATEST_PET_STATUS,
       payload: res.data,
     });
   } catch (err) {
