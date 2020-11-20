@@ -290,7 +290,7 @@ export const getUserLikedPets = () => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
     const res = await axios.get(
-      `${URL_HOST}/user/${user_id}/liked-pets`,
+      `${URL_HOST}/user/${user_id}/pets`,
       getConfig
     );
     console.log(res);

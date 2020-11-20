@@ -52,7 +52,7 @@ const ManageLikedPets = ({
         <h1 className="large mytext-primary">My Favorite Pets</h1>
       </Jumbotron>
 
-      {loading && likedPets === null ? (
+      {loading && userLikedPetProfiles === null ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -79,6 +79,7 @@ const ManageLikedPets = ({
 
 ManageLikedPets.propTypes = {
   getUserLikedPets: PropTypes.func.isRequired,
+  likeAPet: PropTypes.func.isRequired,
   petProfile: PropTypes.object.isRequired,
 };
 
