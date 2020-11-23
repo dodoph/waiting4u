@@ -354,12 +354,17 @@ button {
   text-align: center;
 }
 
+.myCarousel {
+  justify-content: center;
+  background-color: lavenderblush;
+}
+
 .myCarousel-item {
-  width: 95%;
-  max-height: 400px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-height: 400px;
 }
 
 /* Profiles Page */

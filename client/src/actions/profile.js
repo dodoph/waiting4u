@@ -9,7 +9,11 @@ import {
   UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
+<<<<<<< HEAD
   GET_ALL_LIKED_PET_PROFILES,
+=======
+  GET_LATEST_PET_STATUS
+>>>>>>> master
 } from "./types";
 
 // Global config settings
@@ -363,3 +367,24 @@ export const updateAdminProfile = (formData, history) => async (dispatch) => {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
 };
+<<<<<<< HEAD
+=======
+
+//Get recent updates
+export const getRecentStatusUpdate = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${URL_HOST}/pets/status`, getConfig);
+    console.log(res);
+    dispatch({
+      type: GET_LATEST_PET_STATUS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.Error, status: err.response.status },
+    });
+  }
+};
+>>>>>>> master
