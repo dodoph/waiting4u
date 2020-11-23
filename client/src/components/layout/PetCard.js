@@ -1,14 +1,16 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { likeAPet } from "../../actions/profile";
 
 export const PetCard = (props) => {
   const pet_name =
     props.pet_name.charAt(0).toUpperCase() + props.pet_name.slice(1);
 
-  const handleLikeButton = () => {
-
-  }
+  const handleLikeButton = (pet_id) => {
+    console.log(pet_id);
+    likeAPet(pet_id);
+  };
 
   return (
     <Card style={props.style} key={props.index} className="text-center">
@@ -19,7 +21,10 @@ export const PetCard = (props) => {
           <i className="fas fa-dog fa-7x" style={{ color: "white" }}></i>
         </div>
       )}
-      <div className="like-button-div" onClick={handleLikeButton}>
+      <div
+        className="like-button-div"
+        onClick={() => handleLikeButton(props.pet_id)}
+      >
         <i className="fas fa-heart fa-2x like-button-icon"></i>
       </div>
       <Card.Body>

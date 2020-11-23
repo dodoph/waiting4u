@@ -310,12 +310,11 @@ export const getUserLikedPets = () => async (dispatch) => {
 export const likeAPet = (pet_id) => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
-    const res = await axios.patch(
+    const res = await axios.put(
       `${URL_HOST}/user/${user_id}/like-pet/${pet_id}`,
       postConfig
     );
     console.log(res);
-    dispatch(setAlert("Added the pet to your favorite list!", "success"));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

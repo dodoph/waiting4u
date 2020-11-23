@@ -522,6 +522,7 @@ button {
 .like-button-div {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .like-button-icon {
