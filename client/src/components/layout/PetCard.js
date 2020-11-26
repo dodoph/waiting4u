@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export const PetCard = (props) => {
   const pet_name =
@@ -18,6 +18,9 @@ export const PetCard = (props) => {
 
   const handleLikeButton = (pet_id) => {
     console.log(pet_id);
+    if (!props.user) {
+      window.location = "/login";
+    }
     if (props.role && props.role === "user") {
       props.likeAPet(pet_id);
     }
