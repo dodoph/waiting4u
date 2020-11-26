@@ -9,11 +9,9 @@ import {
   UPDATE_PET_PROFILE,
   GET_ADMINS_PET_PROFILES,
   GET_ALL_PET_PROFILES,
-<<<<<<< HEAD
-  GET_ALL_LIKED_PET_PROFILES,
-=======
-  GET_LATEST_PET_STATUS
->>>>>>> master
+  GET_USER_FAVORITE_PET_PROFILES,
+  GET_LATEST_PET_STATUS,
+  USER_LOADED,
 } from "./types";
 
 // Global config settings
@@ -289,20 +287,21 @@ export const getAllPetProfilesSortedBy = (sort, order) => async (dispatch) => {
   }
 };
 
-// Get all pet profiles that a user liked
-export const getUserLikedPets = () => async (dispatch) => {
+// Get user's favorite pet profiles
+export const getUserFavoritePets = () => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
     const res = await axios.get(
-      `${URL_HOST}/user/${user_id}/pets`,
+      `${URL_HOST}/users/${user_id}/favorites`,
       getConfig
     );
     console.log(res);
     dispatch({
-      type: GET_ALL_LIKED_PET_PROFILES,
+      type: GET_USER_FAVORITE_PET_PROFILES,
       payload: res.data.length === 0 ? [] : res.data,
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.Error, status: err.response.status },
@@ -310,15 +309,50 @@ export const getUserLikedPets = () => async (dispatch) => {
   }
 };
 
-// User like a pet
+// User likes a pet
 export const likeAPet = (pet_id) => async (dispatch) => {
+  if (localStorage.getItem("role") === "user") {
+    try {
+      const user_id = localStorage.getItem("token");
+      const res = await axios.put(
+        `${URL_HOST}/users/${user_id}/pets/${pet_id}`,
+        postConfig
+      );
+      console.log(res);
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+      dispatch(setAlert("Added pet to wishlist", "success"));
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.Error, status: err.response.status },
+      });
+    }
+  }
+};
+
+// User dislikes a pet
+export const dislikeAPet = (pet_id) => async (dispatch) => {
   try {
     const user_id = localStorage.getItem("token");
-    const res = await axios.put(
-      `${URL_HOST}/user/${user_id}/like-pet/${pet_id}`,
-      postConfig
+    await axios.delete(`${URL_HOST}/users/${user_id}/pets/${pet_id}`);
+    dispatch(setAlert("Removed pet from wishlist", "success"));
+    // Update reducer
+    const res = await axios.get(
+      `${URL_HOST}/users/${user_id}/favorites`,
+      getConfig
     );
-    console.log(res);
+    dispatch({
+      type: GET_USER_FAVORITE_PET_PROFILES,
+      payload: res.data.length === 0 ? [] : res.data,
+    });
+    const res1 = await axios.get(`${URL_HOST}/users/${user_id}`, getConfig);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res1.data,
+    });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -367,8 +401,6 @@ export const updateAdminProfile = (formData, history) => async (dispatch) => {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
 };
-<<<<<<< HEAD
-=======
 
 //Get recent updates
 export const getRecentStatusUpdate = () => async (dispatch) => {
@@ -387,4 +419,3 @@ export const getRecentStatusUpdate = () => async (dispatch) => {
     });
   }
 };
->>>>>>> master

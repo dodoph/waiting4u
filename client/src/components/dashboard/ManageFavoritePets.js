@@ -1,31 +1,32 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { getUserLikedPets, likeAPet } from "../../actions/profile";
+import { getUserFavoritePets, dislikeAPet } from "../../actions/profile";
 import { Table, Button, Jumbotron } from "react-bootstrap";
 
-const ManageLikedPets = ({
-  getUserLikedPets,
-  petProfile: { userLikedPetProfiles, loading },
+const ManageFavoritePets = ({
+  getUserFavoritePets,
+  dislikeAPet,
+  petProfile: { userFavoritePetProfiles, loading },
 }) => {
   useEffect(() => {
-    if (!userLikedPetProfiles) {
-      getUserLikedPets();
+    if (!userFavoritePetProfiles) {
+      getUserFavoritePets();
     }
   }, []);
 
   const handleOnClick = (pet_id) => {
-    likeAPet(pet_id);
+    dislikeAPet(pet_id);
   };
 
-  const pets = userLikedPetProfiles
-    ? userLikedPetProfiles.map((pet) => (
+  const pets = userFavoritePetProfiles
+    ? userFavoritePetProfiles.map((pet) => (
         <tr key={pet.pet_id}>
           <td>{pet.pet_name}</td>
           <td>
             {pet.image_url ? (
-              <img src={pet.image_url} style={{ maxWidth: "10rem" }} />
+              <img src={pet.image_url} style={{ maxWidth: "10rem" }} alt={pet.pet_name}/>
             ) : (
               <div
                 style={{
@@ -52,7 +53,7 @@ const ManageLikedPets = ({
         <h1 className="large mytext-primary">My Favorite Pets</h1>
       </Jumbotron>
 
-      {loading && userLikedPetProfiles === null ? (
+      {loading && userFavoritePetProfiles === null ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -68,7 +69,7 @@ const ManageLikedPets = ({
             <tbody>{pets}</tbody>
           </Table>
 
-          <Button href="/userdashboard" style={{ float: "right" }}>
+          <Button href="/dashboard" style={{ float: "right" }}>
             Go Back
           </Button>
         </Fragment>
@@ -77,9 +78,9 @@ const ManageLikedPets = ({
   );
 };
 
-ManageLikedPets.propTypes = {
-  getUserLikedPets: PropTypes.func.isRequired,
-  likeAPet: PropTypes.func.isRequired,
+ManageFavoritePets.propTypes = {
+  getUserFavoritePets: PropTypes.func.isRequired,
+  dislikeAPet: PropTypes.func.isRequired,
   petProfile: PropTypes.object.isRequired,
 };
 
@@ -88,5 +89,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getUserLikedPets,
-})(ManageLikedPets);
+  getUserFavoritePets, dislikeAPet
+})(ManageFavoritePets);

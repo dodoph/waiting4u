@@ -4,7 +4,6 @@ import Spinner from "../layout/Spinner";
 import { getPetProfileViewOnly } from "../../actions/profile";
 import { connect } from "react-redux";
 import { Button, Jumbotron, Row, Col } from "react-bootstrap";
-import img_placeholder from "../../img/dog-solid.svg";
 import { withRouter } from "react-router-dom";
 
 const PetProfile = ({
@@ -33,6 +32,7 @@ const PetProfile = ({
               src={petProfile.image_url}
               style={{ maxWidth: "500px",  width: "100%" }}
               className="center"
+              alt={petProfile.pet_name}
             ></img>
           ) : (
             <div style={{ padding: "2rem", textAlign: "center" }}>

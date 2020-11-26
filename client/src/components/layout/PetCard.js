@@ -1,15 +1,26 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { likeAPet } from "../../actions/profile";
 
 export const PetCard = (props) => {
   const pet_name =
     props.pet_name.charAt(0).toUpperCase() + props.pet_name.slice(1);
 
+  let isFavoritePet = false;
+  if (props.user && props.role === "user" && props.user.favoritePets) {
+    props.user.favoritePets.forEach((pet_id) => {
+      if (pet_id === props.pet_id) {
+        isFavoritePet = true;
+      }
+    });
+  }
+
   const handleLikeButton = (pet_id) => {
     console.log(pet_id);
-    likeAPet(pet_id);
+    if (props.role && props.role === "user") {
+      props.likeAPet(pet_id);
+    }
   };
 
   return (
@@ -25,7 +36,11 @@ export const PetCard = (props) => {
         className="like-button-div"
         onClick={() => handleLikeButton(props.pet_id)}
       >
-        <i className="fas fa-heart fa-2x like-button-icon"></i>
+        {isFavoritePet ? (
+          <i className="fas fa-heart fa-2x liked-button-icon"></i>
+        ) : (
+          <i className="fas fa-heart fa-2x like-button-icon"></i>
+        )}
       </div>
       <Card.Body>
         <Card.Title className="pet-name">{pet_name}</Card.Title>
@@ -44,4 +59,9 @@ export const PetCard = (props) => {
   );
 };
 
-export default PetCard;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  role: state.auth.role,
+});
+
+export default connect(mapStateToProps)(PetCard);

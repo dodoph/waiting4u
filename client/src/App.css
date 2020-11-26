@@ -538,6 +538,14 @@ button {
   color: #ecb9f0;
 }
 
+.liked-button-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FF1493;
+}
+
 .pet-name {
   color: var(--primary-color);
   font-size: xx-large;

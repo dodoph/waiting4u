@@ -28,7 +28,7 @@ const UserDashboard = ({ auth: { user, loading } }) => {
                 <Card.Text>
                   <i className="fas fa-crown fa-5x"></i>
                 </Card.Text>
-                <Button href="/likedpets">Liked Pets</Button>
+                <Button href="/favorite-pets">Favorite Pets</Button>
               </Card.Body>
             </Card>
 

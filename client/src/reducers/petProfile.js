@@ -6,7 +6,8 @@ import {
   CLEAR_PET_PROFILE,
   CLEAR_ADMINS_PET_PROFILES,
   PROFILE_ERROR,
-  GET_LATEST_PET_STATUS
+  GET_LATEST_PET_STATUS,
+  GET_USER_FAVORITE_PET_PROFILES,
 } from "../actions/types";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   adminsPetProfiles: null,
   allPetProfiles: null,
   petUpdateProfiles: null,
+  userFavoritePetProfiles: null,
   loading: true,
   error: null,
 };
@@ -53,18 +55,25 @@ export default function (state = initialState, action) {
         adminsPetProfiles: null,
         loading: false,
       };
-    case PROFILE_ERROR:
-      return {
-        ...state,
-        error: payload,
-        loading: false,
-      };
     case GET_LATEST_PET_STATUS:
       return {
         ...state,
         petUpdateProfiles: payload,
         loading: false,
       };
+    case GET_USER_FAVORITE_PET_PROFILES:
+      return {
+        ...state,
+        userFavoritePetProfiles: payload,
+        loading: false,
+      };
+    case PROFILE_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
+      };
+
     default:
       return state;
   }
