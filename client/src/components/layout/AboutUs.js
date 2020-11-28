@@ -90,13 +90,14 @@ export const AboutUs = ({ submitContactRequest }) => {
 
           <Form.Group as={Row}>
             <Form.Label column sm={2}>
-              Pet Name:
+              Message:
             </Form.Label>
             <Col sm={10}>
               <Form.Control
-                type="name"
-                placeholder="The name for the pet that you are interested in. "
-                name="petName"
+                as="textarea"
+                rows={5}
+                placeholder="Please let us know how we can help to find you a purfect match! "
+                name="message"
                 onChange={onChange}
                 required
               />
@@ -105,18 +106,18 @@ export const AboutUs = ({ submitContactRequest }) => {
 
           <Form.Group as={Row}>
             <Form.Label column sm={2}>
-              Message:
+              Pet Name:
             </Form.Label>
             <Col sm={10}>
               <Form.Control
-                as="textarea"
-                rows={5}
-                placeholder="Optional: please let us know how we can help to find you a purfect match! "
-                name="message"
+                type="name"
+                placeholder="Optional: what's the name for the pet that you are looking for?"
+                name="petName"
                 onChange={onChange}
               />
             </Col>
           </Form.Group>
+
 
           <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
