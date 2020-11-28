@@ -32,7 +32,6 @@ const ManagePets = ({
   const handleOnClick = (pet_id) => {
     status.push(statusValue);
     updatePetStatus(status, pet_id);
-    debugger;
     const resetFormData = { ...formData, status: [], statusValue: "" };
     setFormData(resetFormData);
   };
@@ -42,7 +41,7 @@ const ManagePets = ({
         <tr key={pet.pet_id}>
           <td>{pet.pet_name}</td>
           <td>
-            <img src={pet.image_url} style={{ maxWidth: "10rem" }} />
+            <img src={pet.image_url} style={{ maxWidth: "10rem" }} alt={pet.pet_name}/>
           </td>
           <td>
             <Link to={`/edit-pet-profile/${pet.pet_id}`}>

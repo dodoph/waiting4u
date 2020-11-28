@@ -16,9 +16,9 @@ const MyCarousel = ({
     }, [petUpdateProfiles]);
   return (
     <Carousel>
-        {petUpdateProfiles ? (petUpdateProfiles.map((pet) =>{
+        {petUpdateProfiles ? (petUpdateProfiles.map((pet, index) =>{
             return (
-                <Carousel.Item>
+                <Carousel.Item key={index}>
                     <img className="myCarousel-item" src={pet.image_url} alt="slide" />
                     <Carousel.Caption>
                         <h3>{pet.pet_name}</h3>
