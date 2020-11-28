@@ -491,7 +491,7 @@ button {
 }
 
 /* AboutUs Page */
-.about-us {
+/* .about-us {
   position: relative;
   background: url("./img/krista-mangulsone-9gz3wfHr65U-unsplash.jpg") no-repeat
     center center/cover;
@@ -508,13 +508,18 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-}
+} */
 
 .center {
-  display: block;
+  display: flex;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.contact-button {
+  display: flex;
+  margin-bottom: 20px;
 }
 
 /* Dashboard Page */
