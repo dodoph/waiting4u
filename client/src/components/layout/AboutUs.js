@@ -1,15 +1,36 @@
-import React, { Fragment } from "react";
-import { Jumbotron } from "react-bootstrap";
+import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
+import { Button, Col, Form, Jumbotron, Row } from "react-bootstrap";
+import { submitContactRequest } from "../../actions/profile";
+import PropTypes from "prop-types";
 
 import logo from "../../../src/img/take-me-home-logo.jpg";
 
-export const AboutUs = () => {
+const initialState = {
+  name: "",
+  email: "",
+  petName: "",
+  message: "",
+};
+
+
+export const AboutUs = ({ submitContactRequest }) => {
+  const [formData, setFormData] = useState(initialState);
+  const [displayContactForm, toggleContactForm] = useState(false);
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    submitContactRequest(formData);
+  }
   return (
     <Fragment>
+
       <Jumbotron>
-        <h1 className="page-header">
-          About “Waiting4U”
-        </h1>
+        <h1 className="page-header">About “Waiting4U”</h1>
         <p className="lead mytext-center">Finding your purfect-match!</p>
       </Jumbotron>
 
@@ -29,14 +50,89 @@ export const AboutUs = () => {
           alt="take-me-home-logo"
           style={{ maxWidth: "fit-content" }}
         />
-        <p className="mytext-center">
-          Contact us: <br></br>
-          Email: generaladmin@waiting4u.com <br></br>
-          Phone: 123-456-7890
-        </p>
       </div>
+
+      <div className="contact-button" >
+        <Button onClick={() => toggleContactForm(!displayContactForm)}> Click here to contact us </Button>
+      </div>
+
+        {displayContactForm && (
+          <Form onSubmit={onSubmit}>
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+              Name:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="name"
+                placeholder="Name"
+                name="name"
+                onChange={onChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+              Email:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={onChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+              Message:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                as="textarea"
+                rows={5}
+                placeholder="Please let us know how we can help to find you a purfect match! "
+                name="message"
+                onChange={onChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row}>
+            <Form.Label column sm={2}>
+              Pet Name:
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="name"
+                placeholder="Optional: what's the name for the pet that you are looking for?"
+                name="petName"
+                onChange={onChange}
+              />
+            </Col>
+          </Form.Group>
+
+
+          <Form.Group as={Row}>
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Button type="submit">Submit</Button>
+          </Col>
+        </Form.Group>
+        </Form>
+        )}
+
     </Fragment>
   );
 };
 
-export default AboutUs;
+AboutUs.propTypes = {
+  submitContactRequest: PropTypes.func.isRequired,
+};
+
+export default connect(null, { submitContactRequest })(AboutUs);

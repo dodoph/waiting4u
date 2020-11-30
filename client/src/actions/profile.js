@@ -419,3 +419,19 @@ export const getRecentStatusUpdate = () => async (dispatch) => {
     });
   }
 };
+
+// Submit contact request
+export const submitContactRequest = (formData) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `${URL_HOST}/contactform`,
+      formData,
+      postConfig
+    );
+    console.log(res);
+    debugger;
+    dispatch(setAlert("Your message is sent successfully!", "success"));
+  } catch (err) {
+    dispatch(setAlert(err.response.data.Error, "danger"));
+  }
+};
