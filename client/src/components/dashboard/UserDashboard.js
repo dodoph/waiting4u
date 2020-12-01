@@ -37,7 +37,7 @@ const UserDashboard = ({ auth: { user, loading } }) => {
                 <Card.Text>
                   <i className="fas fa-user-edit fa-5x"></i>
                 </Card.Text>
-                <Button href="/usereditprofile">View/Update Profile</Button>
+                <Button href="/usereditprofile">Profile Settings</Button>
               </Card.Body>
             </Card>
           </CardDeck>
