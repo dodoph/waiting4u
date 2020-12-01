@@ -72,7 +72,7 @@ img {
 
 /* Padding */
 .p {
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 /* Margin */
@@ -206,13 +206,13 @@ button {
 .page-header {
   color: var(--primary-color);
   font-size: 4rem;
-  font-family: 'Indie Flower', cursive;
+  font-family: "Indie Flower", cursive;
   text-align: center;
 }
 
 .pet-profile {
   font-size: 1.5rem;
-  font-family: 'Indie Flower', cursive;
+  font-family: "Indie Flower", cursive;
 }
 
 /* Navbar */
@@ -229,9 +229,9 @@ button {
   opacity: 0.9;
 }
 
-.myNavbar-header{
+.myNavbar-header {
   color: var(--primary-color);
-  font-family: 'Indie Flower', cursive;
+  font-family: "Indie Flower", cursive;
   margin: auto 5px;
 }
 
@@ -335,11 +335,11 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #FF1493;
+  color: #ff1493;
 }
 
 .pet-name {
   color: var(--primary-color);
   font-size: xx-large;
-  font-family: 'Indie Flower', cursive;
+  font-family: "Indie Flower", cursive;
 }
