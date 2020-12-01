@@ -19,9 +19,7 @@ export const AboutUs = ({ submitContactRequest }) => {
 
   const onClick = (e) => {
     if (displayContactForm) {
-      console.log(formData);
       setFormData({ ...initialState });
-      console.log(formData);
     }
     toggleContactForm(!displayContactForm);
   };

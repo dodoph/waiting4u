@@ -267,6 +267,23 @@ button {
   max-height: 400px;
 }
 
+.myCarousel-caption {
+  background: rgb(255, 255, 255, 0.5);
+  color: #e153b4;
+}
+
+.myCarousel-pet-icon-div {
+  padding: 2rem;
+  padding-top: 100px;
+  background: #d3d3d3;
+  height: 400px;
+  width: 600px;
+}
+
+.carousel-caption {
+  z-index: 1;
+}
+
 /* AboutUs Page */
 .center {
   display: flex;
@@ -282,6 +299,18 @@ button {
 
 /* Dashboard Page */
 .col {
+  display: flex;
+  justify-content: center;
+}
+
+.pet-icon-div {
+  padding: 2rem;
+  background: #d3d3d3;
+  max-width: 150px;
+}
+
+.pet-icon {
+  color: white;
   display: flex;
   justify-content: center;
 }

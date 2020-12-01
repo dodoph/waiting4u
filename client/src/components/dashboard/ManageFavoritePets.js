@@ -35,17 +35,8 @@ const ManageFavoritePets = ({
                     alt={pet.pet_name}
                   />
                 ) : (
-                  <div
-                    style={{
-                      padding: "2rem",
-                      background: "#d3d3d3",
-                      maxWidth: "150px",
-                    }}
-                  >
-                    <i
-                      className="fas fa-dog fa-5x"
-                      style={{ color: "white" }}
-                    ></i>
+                  <div className="pet-icon-div">
+                    <i className="fas fa-dog fa-5x pet-icon"></i>
                   </div>
                 )}
               </Link>
