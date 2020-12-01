@@ -244,7 +244,7 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
       params = params + "type=" + type.toLowerCase();
     }
     if (breed !== "All") {
-      params = params + "&breed=" + breed.toLowerCase();
+      params = params + "&breed=" + breed;
     }
     if (dispositions.length > 0) {
       if (type === "All" && breed === "All") {
