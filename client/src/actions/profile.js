@@ -105,7 +105,7 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Pet Profile Created", "success"));
-    history.push("/admindashboard");
+    history.push("/managepets");
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }

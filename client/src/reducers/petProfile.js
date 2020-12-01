@@ -12,6 +12,7 @@ import {
 
 const initialState = {
   petProfile: null,
+  petProfileUpdated: false,
   adminsPetProfiles: null,
   allPetProfiles: null,
   petUpdateProfiles: null,
@@ -25,15 +26,22 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_PET_PROFILE:
-    case UPDATE_PET_PROFILE:
       return {
         ...state,
         petProfile: payload,
+        petProfileUpdated: false,
         loading: false,
+      };
+    case UPDATE_PET_PROFILE:
+      return {
+        ...state,
+        petProfile: null,
+        petProfileUpdated: true,
       };
     case GET_ADMINS_PET_PROFILES:
       return {
         ...state,
+        petProfileUpdated: false,
         adminsPetProfiles: payload,
         loading: false,
       };
@@ -46,7 +54,7 @@ export default function (state = initialState, action) {
     case CLEAR_PET_PROFILE:
       return {
         ...state,
-        petProfile: null,
+        allPetProfiles: null,
         loading: false,
       };
     case CLEAR_ADMINS_PET_PROFILES:

@@ -56,13 +56,13 @@ const EditPetProfile = ({
   updatePetProfile,
   history,
   match: { params },
-  petProfile: { petProfile, loading },
+  petProfile: { petProfile, petProfileUpdated, loading },
 }) => {
   const [formData, setFormData] = useState(initialState);
   const [dispositionData, setDispositionData] = useState(initialDispositions);
 
   useEffect(() => {
-    if (!petProfile) {
+    if (!petProfileUpdated && !petProfile) {
       getPetProfile(params.id);
     }
     if (!loading && petProfile) {
@@ -286,8 +286,8 @@ const EditPetProfile = ({
 
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Update Pet Profile</Button>
-            <Button href="/admindashboard" style={{float: "right"}}>Cancel</Button>
+            <Button type="submit">Update</Button>
+            <Button href="/managepets" style={{float: "right"}}>Cancel</Button>
           </Col>
         </Form.Group>
       </Form>
