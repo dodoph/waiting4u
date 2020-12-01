@@ -429,7 +429,6 @@ export const submitContactRequest = (formData) => async (dispatch) => {
       postConfig
     );
     console.log(res);
-    debugger;
     dispatch(setAlert("Your message is sent successfully!", "success"));
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));

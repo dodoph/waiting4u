@@ -13,10 +13,18 @@ const initialState = {
   message: "",
 };
 
-
 export const AboutUs = ({ submitContactRequest }) => {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState({...initialState});
   const [displayContactForm, toggleContactForm] = useState(false);
+
+  const onClick = (e) => {
+    if (displayContactForm) {
+      console.log(formData);
+      setFormData({ ...initialState });
+      console.log(formData);
+    }
+    toggleContactForm(!displayContactForm);
+  };
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,7 +61,7 @@ export const AboutUs = ({ submitContactRequest }) => {
       </div>
 
       <div className="contact-button" >
-        <Button onClick={() => toggleContactForm(!displayContactForm)}> Click here to contact us </Button>
+        <Button onClick={onClick}> Click here to contact us </Button>
       </div>
 
         {displayContactForm && (
