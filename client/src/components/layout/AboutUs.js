@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button, Col, Form, Jumbotron, Row } from "react-bootstrap";
 import { submitContactRequest } from "../../actions/profile";
@@ -13,7 +14,7 @@ const initialState = {
   message: "",
 };
 
-export const AboutUs = ({ submitContactRequest }) => {
+export const AboutUs = ({ submitContactRequest, history }) => {
   const [formData, setFormData] = useState({...initialState});
   const [displayContactForm, toggleContactForm] = useState(false);
 
@@ -30,7 +31,7 @@ export const AboutUs = ({ submitContactRequest }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    submitContactRequest(formData);
+    submitContactRequest(formData, history);
   }
   return (
     <Fragment>
@@ -141,4 +142,4 @@ AboutUs.propTypes = {
   submitContactRequest: PropTypes.func.isRequired,
 };
 
-export default connect(null, { submitContactRequest })(AboutUs);
+export default connect(null, { submitContactRequest })( withRouter(AboutUs) );

@@ -421,15 +421,15 @@ export const getRecentStatusUpdate = () => async (dispatch) => {
 };
 
 // Submit contact request
-export const submitContactRequest = (formData) => async (dispatch) => {
+export const submitContactRequest = (formData, history) => async (dispatch) => {
   try {
     const res = await axios.post(
       `${URL_HOST}/contactform`,
       formData,
       postConfig
     );
-    console.log(res);
-    dispatch(setAlert("Your message is sent successfully!", "success"));
+    console.log(res.data);
+    history.push("/confirmation", res.data);
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
