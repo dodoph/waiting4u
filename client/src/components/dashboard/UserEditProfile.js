@@ -159,7 +159,7 @@ const UserEditProfile = ({
 
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Update Profile</Button>
+            <Button type="submit">Update</Button>
             <Button href="/dashboard" style={{ float: "right" }}>
               Cancel
             </Button>
