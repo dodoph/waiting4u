@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getUserFavoritePets, dislikeAPet } from "../../actions/profile";
 import { Table, Button, Jumbotron } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ManageFavoritePets = ({
   getUserFavoritePets,
@@ -25,19 +26,21 @@ const ManageFavoritePets = ({
         <tr key={pet.pet_id}>
           <td>{pet.pet_name}</td>
           <td>
-            {pet.image_url ? (
-              <img src={pet.image_url} style={{ maxWidth: "10rem" }} alt={pet.pet_name}/>
-            ) : (
-              <div
-                style={{
-                  padding: "2rem",
-                  background: "#d3d3d3",
-                  maxWidth: "150px",
-                }}
-              >
-                <i className="fas fa-dog fa-5x" style={{ color: "white" }}></i>
-              </div>
-            )}
+            <div>
+              <Link to={`/pets/${pet.pet_id}`}>
+                {pet.image_url ? (
+                  <img
+                    src={pet.image_url}
+                    style={{ maxWidth: "10rem" }}
+                    alt={pet.pet_name}
+                  />
+                ) : (
+                  <div className="pet-icon-div">
+                    <i className="fas fa-dog fa-5x pet-icon"></i>
+                  </div>
+                )}
+              </Link>
+            </div>
           </td>
           <td>{pet.availability}</td>
           <td>
@@ -89,5 +92,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getUserFavoritePets, dislikeAPet
+  getUserFavoritePets,
+  dislikeAPet,
 })(ManageFavoritePets);

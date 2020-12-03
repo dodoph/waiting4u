@@ -18,6 +18,7 @@ import { Route, Switch } from "react-router-dom";
 import EditPetProfile from "../dashboard/EditPetProfile";
 import UserEditProfile from "../dashboard/UserEditProfile";
 import ManageFavoritePets from "../dashboard/ManageFavoritePets";
+import Confirmation from "../layout/Confirmation";
 
 const Routes = () => {
   return (
@@ -31,19 +32,17 @@ const Routes = () => {
         <Route exact path="/adminregister" component={AdminRegister} />
         <Route exact path="/adminlogin" component={AdminLogin} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/confirmation" component={Confirmation} />
+        
         <PrivateRoute exact path="/admineditprofile" component={AdminEditProfile} />
         <PrivateRoute exact path="/usereditprofile" component={UserEditProfile} />
-
-        <PrivateRoute
-          exact
-          path="/create-pet-profile"
-          component={CreatePetProfile}
-        />
+        <PrivateRoute exact path="/create-pet-profile" component={CreatePetProfile} />
         <PrivateRoute exact path="/edit-pet-profile/:id" component={EditPetProfile} />
         <PrivateRoute exact path="/admindashboard" component={AdminDashboard} />
         <PrivateRoute exact path="/managepets" component={ManagePets} />
         <PrivateRoute exact path="/dashboard" component={UserDashboard} />
         <PrivateRoute exact path="/favorite-pets" component={ManageFavoritePets} />
+        
         <Route component={NotFound} />
       </Switch>
     </section>

@@ -105,7 +105,7 @@ export const createPetProfile = (formData, history) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Pet Profile Created", "success"));
-    history.push("/admindashboard");
+    history.push("/managepets");
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }
@@ -244,7 +244,7 @@ export const getAllPetsProfilesBySearch = (formData) => async (dispatch) => {
       params = params + "type=" + type.toLowerCase();
     }
     if (breed !== "All") {
-      params = params + "&breed=" + breed.toLowerCase();
+      params = params + "&breed=" + breed;
     }
     if (dispositions.length > 0) {
       if (type === "All" && breed === "All") {
@@ -421,16 +421,15 @@ export const getRecentStatusUpdate = () => async (dispatch) => {
 };
 
 // Submit contact request
-export const submitContactRequest = (formData) => async (dispatch) => {
+export const submitContactRequest = (formData, history) => async (dispatch) => {
   try {
     const res = await axios.post(
       `${URL_HOST}/contactform`,
       formData,
       postConfig
     );
-    console.log(res);
-    debugger;
-    dispatch(setAlert("Your message is sent successfully!", "success"));
+    console.log(res.data);
+    history.push("/confirmation", res.data);
   } catch (err) {
     dispatch(setAlert(err.response.data.Error, "danger"));
   }

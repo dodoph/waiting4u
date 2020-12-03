@@ -46,7 +46,7 @@ export const MyNavbar = ({ auth: { role, isAuthenticated }, logout }) => {
       <h2>
         <Link to="/">
           <i className="fas fa-paw fa-xs"></i>
-          <span className="navbar-header">Waiting4U</span>
+          <span className="myNavbar-header">Waiting4U</span>
         </Link>
       </h2>
 

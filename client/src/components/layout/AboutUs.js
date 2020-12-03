@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button, Col, Form, Jumbotron, Row } from "react-bootstrap";
 import { submitContactRequest } from "../../actions/profile";
@@ -13,10 +14,16 @@ const initialState = {
   message: "",
 };
 
-
-export const AboutUs = ({ submitContactRequest }) => {
-  const [formData, setFormData] = useState(initialState);
+export const AboutUs = ({ submitContactRequest, history }) => {
+  const [formData, setFormData] = useState({...initialState});
   const [displayContactForm, toggleContactForm] = useState(false);
+
+  const onClick = (e) => {
+    if (displayContactForm) {
+      setFormData({ ...initialState });
+    }
+    toggleContactForm(!displayContactForm);
+  };
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +31,7 @@ export const AboutUs = ({ submitContactRequest }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    submitContactRequest(formData);
+    submitContactRequest(formData, history);
   }
   return (
     <Fragment>
@@ -53,7 +60,7 @@ export const AboutUs = ({ submitContactRequest }) => {
       </div>
 
       <div className="contact-button" >
-        <Button onClick={() => toggleContactForm(!displayContactForm)}> Click here to contact us </Button>
+        <Button onClick={onClick}> Click here to contact us </Button>
       </div>
 
         {displayContactForm && (
@@ -135,4 +142,4 @@ AboutUs.propTypes = {
   submitContactRequest: PropTypes.func.isRequired,
 };
 
-export default connect(null, { submitContactRequest })(AboutUs);
+export default connect(null, { submitContactRequest })( withRouter(AboutUs) );

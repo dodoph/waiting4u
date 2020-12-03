@@ -7,6 +7,7 @@ import MyCards from "../landing/MyCards";
 export const Landing = () => {
   return (
     <Container>
+
       <Row className="myCarousel">
           <MyCarousel />
       </Row>
@@ -17,6 +18,7 @@ export const Landing = () => {
           <MyCards />
         </Row>
       </Container>
+      
     </Container>
   );
 };

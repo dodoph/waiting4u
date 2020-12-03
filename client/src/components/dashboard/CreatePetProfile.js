@@ -282,7 +282,7 @@ const CreatePetProfile = ({ createPetProfile, history }) => {
 
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit">Create Pet Profile</Button>
+            <Button type="submit">Add</Button>
             <Button href="/admindashboard" style={{float:"right"}}>Cancel</Button>
           </Col>
         </Form.Group>
